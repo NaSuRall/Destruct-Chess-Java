@@ -65,10 +65,10 @@ public class Game {
                     // If the move is invalid, show the board and ask the same player to try again
                     Board.showBoard(board);
                     if (isPlayer1Turn) {
-                        System.out.println("Player1's turn");
+                        System.out.println(playerNames[0] + "'s turn");
                     }
                     else {
-                        System.out.println("Player2's turn");
+                        System.out.println(playerNames[1] + "'s turn");
                     }
                 }
             }
