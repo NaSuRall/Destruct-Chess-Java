@@ -23,7 +23,6 @@ public class PlayerManager{
             playerNames[i] = userName;
             System.out.println("Joueur " + (i + 1) + " est maintenant : " + playerNames[i]);
         }
-
         scanner.close();
     }
 
