@@ -2,7 +2,7 @@ import java.util.Random;
 
 public class Game {
 
-    public static void main (String[] args) {
+    public static void main () {
 
         // Create the game board with 10 rows and 11 columns
         char[][] board = Board.CreateBoard(10,11);

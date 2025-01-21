@@ -17,6 +17,7 @@ public class Menu {
                     case 1:
                         System.out.println("The game will begin");
                         PlayerManager.requestPlayerName();
+                        Game.main();
                         break;
 
                     case 2:
