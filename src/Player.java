@@ -8,7 +8,7 @@ public class Player {
         // Place the player at the specified row and column
         board[row][col] = playerSymbol; // Place the player in the cell
     }
-    public static void requestPlayerName(){
+    public static String[] requestPlayerName(){
         Scanner scanner = new Scanner(System.in);
         String[] playerNames = new String[2];
 
@@ -27,5 +27,6 @@ public class Player {
             playerNames[i] = userName;
             System.out.println("Joueur " + (i + 1) + " est maintenant : " + playerNames[i]);
         }
+        return playerNames;
     }
 }
