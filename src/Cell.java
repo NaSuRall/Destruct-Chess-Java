@@ -6,11 +6,11 @@ public class Cell {
     public static int[] MovePlayer(char[][] board, char player, int currentRow, int currentCol) {
         Scanner scanner = new Scanner(System.in);
 
-        // Demander au joueur de se déplacer
+        // Ask the player to move
         System.out.println("Move (Z = up, Q = left, S = down, D = right): ");
         String input = scanner.next();
 
-        // Vérification de l'entrée
+        // Validate the input
         if (input.length() != 1) {
             System.out.println("You have to enter a single character");
             return null;
@@ -22,40 +22,40 @@ public class Cell {
             return null;
         }
 
-        // Calcul de la nouvelle position
+        // Calculate the new position
         int newRow = currentRow;
         int newCol = currentCol;
 
         switch (move) {
-            case 'Z': newRow--; break; // Haut
-            case 'Q': newCol--; break; // Gauche
-            case 'S': newRow++; break; // Bas
-            case 'D': newCol++; break; // Droite
+            case 'Z': newRow--; break; // Up
+            case 'Q': newCol--; break; // Left
+            case 'S': newRow++; break; // Down
+            case 'D': newCol++; break; // Right
         }
 
-        // Validation du déplacement
+        // Validate the move
         if (newRow >= 0 && newRow < board.length && newCol >= 0 && newCol < board[0].length) {
-            if (board[newRow][newCol] == '*') { // La case est disponible
-                board[currentRow][currentCol] = '*'; // Vide l'ancienne position
-                board[newRow][newCol] = player; // Place le joueur sur la nouvelle position
+            if (board[newRow][newCol] == '*') { // The cell is available
+                board[currentRow][currentCol] = '*'; // Empty the old position
+                board[newRow][newCol] = player; // Place the player on the new position
 
                 Board.showBoard(board);
 
-                // Demander au joueur de détruire une case
-                System.out.println("Where would you like to destroy a case? Enter row and column : ");
+                // Ask the player to destroy a cell
+                System.out.println("Where would you like to destroy a case? Enter row and column: ");
                 int destroyRow = -1;
                 int destroyCol = -1;
 
-                // Validation des entrées pour la ligne et la colonne
+                // Validate the row and column input
                 boolean validInput = false;
                 while (!validInput) {
                     if (scanner.hasNextInt()) {
                         destroyRow = scanner.nextInt();
                         if (scanner.hasNextInt()) {
                             destroyCol = scanner.nextInt();
-                            // Vérification si les coordonnées sont valides
+                            // Check if the coordinates are valid
                             if (destroyRow >= 0 && destroyRow < board.length && destroyCol >= 0 && destroyCol < board[0].length) {
-                                validInput = true; // Coordonnées valides
+                                validInput = true; // Valid coordinates
                             } else {
                                 System.out.println("Invalid coordinates, please enter row and column within the board size.");
                             }
@@ -69,18 +69,18 @@ public class Cell {
                     }
                 }
 
-                // Détruire la case
-                board[destroyRow][destroyCol] = 'D'; // Détruit la case
+                // Destroy the cell
+                board[destroyRow][destroyCol] = 'D'; // Destroy the cell
                 System.out.println("Case at (" + destroyRow + ", " + destroyCol + ") has been destroyed");
 
-                // Vérifiez si l'adversaire est bloqué CONDITION DE DEFAITE
+                // Check if the opponent is blocked (GAME OVER CONDITION)
                 if (checkIfPlayerLost(board, currentRow, currentCol)) {
                     Board.showBoard(board);
                     System.out.println("Player at position (" + currentRow + ", " + currentCol + ") is blocked and has lost!");
                     Main.main(null);
                 }
 
-                return new int[]{newRow, newCol}; // Retournez la nouvelle position
+                return new int[]{newRow, newCol}; // Return the new position
             } else {
                 System.out.println("Case is occupied");
                 return null;
@@ -91,6 +91,7 @@ public class Cell {
         }
     }
 
+    // Method to check if the player has lost
     public static boolean checkIfPlayerLost(char[][] board, int currentRow, int currentCol) {
         // Check all adjacent cells (up, down, left, right)
         return isMoveBlocked(board, currentRow - 1, currentCol) &&  // Up
