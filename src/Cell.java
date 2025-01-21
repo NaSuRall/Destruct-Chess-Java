@@ -43,22 +43,41 @@ public class Cell {
 
                 // Demander au joueur de détruire une case
                 System.out.println("Where would you like to destroy a case? Enter row and column : ");
-                int destroyRow = scanner.nextInt();
-                int destroyCol = scanner.nextInt();
+                int destroyRow = -1;
+                int destroyCol = -1;
 
-                // Valider les coordonnées de destruction
-                if (destroyRow >= 0 && destroyRow < board.length && destroyCol >= 0 && destroyCol < board[0].length) {
-                    board[destroyRow][destroyCol] = 'D'; // Détruit la case
-                    System.out.println("Case at (" + destroyRow + ", " + destroyCol + ") has been destroyed");
-
-                    // Vérifiez si l'adversaire est bloqué CONDITION DE DEFAITE
-                    if (checkIfPlayerLost(board, currentRow, currentCol)) {
-                        Board.showBoard(board);
-                        System.out.println("Player at position (" + currentRow + ", " + currentCol + ") is blocked and has lost!");
-                        Main.main(null);
+                // Validation des entrées pour la ligne et la colonne
+                boolean validInput = false;
+                while (!validInput) {
+                    if (scanner.hasNextInt()) {
+                        destroyRow = scanner.nextInt();
+                        if (scanner.hasNextInt()) {
+                            destroyCol = scanner.nextInt();
+                            // Vérification si les coordonnées sont valides
+                            if (destroyRow >= 0 && destroyRow < board.length && destroyCol >= 0 && destroyCol < board[0].length) {
+                                validInput = true; // Coordonnées valides
+                            } else {
+                                System.out.println("Invalid coordinates, please enter row and column within the board size.");
+                            }
+                        } else {
+                            System.out.println("Please enter a valid number for column.");
+                            scanner.nextLine(); // Clear the invalid input
+                        }
+                    } else {
+                        System.out.println("Please enter a valid number for row.");
+                        scanner.nextLine(); // Clear the invalid input
                     }
-                } else {
-                    System.out.println("Invalid coordinates"); // Coordonnées de destruction invalides
+                }
+
+                // Détruire la case
+                board[destroyRow][destroyCol] = 'D'; // Détruit la case
+                System.out.println("Case at (" + destroyRow + ", " + destroyCol + ") has been destroyed");
+
+                // Vérifiez si l'adversaire est bloqué CONDITION DE DEFAITE
+                if (checkIfPlayerLost(board, currentRow, currentCol)) {
+                    Board.showBoard(board);
+                    System.out.println("Player at position (" + currentRow + ", " + currentCol + ") is blocked and has lost!");
+                    Main.main(null);
                 }
 
                 return new int[]{newRow, newCol}; // Retournez la nouvelle position
@@ -71,7 +90,6 @@ public class Cell {
             return null;
         }
     }
-
 
     public static boolean checkIfPlayerLost(char[][] board, int currentRow, int currentCol) {
         // Check all adjacent cells (up, down, left, right)
@@ -91,5 +109,4 @@ public class Cell {
         // Check if the cell is occupied by 'D' or another invalid character
         return board[row][col] != '*'; // Only '*' allows movement
     }
-
 }
