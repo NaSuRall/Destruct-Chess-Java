@@ -2,15 +2,15 @@ import java.util.Random;
 
 public class Game {
 
-    public static void main (String[] playerNames) {
+    public static void main(String[] playerNames) {
 
         // Create the game board with 10 rows and 11 columns
-        char[][] board = Board.CreateBoard(10,11);
+        char[][] board = Board.CreateBoard(11, 12);
 
-        // Place Player 1 on the board at position (4, 5)
-        Player.placePlayer(board,'1',4,5);
-        // Place Player 2 on the board at position (5, 5)
-        Player.placePlayer(board,'2',5,5);
+        // Place Player 1 on the board at position (5, 6)
+        Player.placePlayer(board, '1', 5, 6);
+        // Place Player 2 on the board at position (6, 6)
+        Player.placePlayer(board, '2', 6, 6);
 
         // Show the board after placing the players
         Board.showBoard(board);
@@ -29,8 +29,7 @@ public class Game {
             // Display whose turn it is
             if (isPlayer1Turn) {
                 System.out.println(playerNames[0] + "'s turn");
-            }
-            else {
+            } else {
                 System.out.println(playerNames[1] + "'s turn");
             }
 
@@ -66,12 +65,12 @@ public class Game {
                     Board.showBoard(board);
                     if (isPlayer1Turn) {
                         System.out.println(playerNames[0] + "'s turn");
-                    }
-                    else {
+                    } else {
                         System.out.println(playerNames[1] + "'s turn");
                     }
                 }
             }
+
             // Switch turns between the players after a valid move
             isPlayer1Turn = !isPlayer1Turn;
         }
