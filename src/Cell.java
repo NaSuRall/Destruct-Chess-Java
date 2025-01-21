@@ -31,6 +31,7 @@ public class Cell {
             case 'Q': newCol--; break; // Left
             case 'S': newRow++; break; // Down
             case 'D': newCol++; break; // Right
+
         }
 
         // Validate the move
@@ -60,7 +61,6 @@ public class Cell {
                                 System.out.println("Invalid coordinates, please enter row and column within the board size.");
                             }
                         } else {
-                            System.out.println("Please enter a valid number for column.");
                             scanner.nextLine(); // Clear the invalid input
                         }
                     } else {
