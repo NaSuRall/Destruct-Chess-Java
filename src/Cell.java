@@ -63,7 +63,7 @@ public class Cell {
                 // Repeatedly ask the user for valid coordinates to destroy a case
                 while (true) {
                      Board.showBoard(board);
-                    System.out.println("Where would you like to destroy a case? Enter row and column (e.g., 2 3): ");
+                    System.out.println("Where would you like to destroy a case? Enter row and column : ");
 
                     // Check if both inputs are integers
                     if (scanner.hasNextInt()) {
