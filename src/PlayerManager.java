@@ -1,6 +1,4 @@
-import org.w3c.dom.ls.LSOutput;
 
-import java.util.Arrays;
 import java.util.Scanner;
 
 public class PlayerManager{
@@ -8,7 +6,7 @@ public class PlayerManager{
         Scanner scanner = new Scanner(System.in);
         String[] playerNames = new String[2];
 
-        for (byte i = 0; i < 2; i++) {
+        for (short i = 0; i < 2; i++) {
             System.out.println("Entrez le nom du joueur " + (i + 1) + " :");
             String userName = scanner.nextLine();
 
