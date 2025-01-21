@@ -58,18 +58,36 @@ public class Cell {
                 board[currentRow][currentCol] = ' ';  // Clear the current position
                 board[newRow][newCol] = player;  // Place the player in the new position
 
-                // Prompt the player to destroy a case
-                System.out.println("Where would you like to destroy a case? Enter row and column : ");
-                int destroyRow = scanner.nextInt();
-                int destroyCol = scanner.nextInt();
+                int destroyRow = -1, destroyCol = -1;
 
-                // Check if the destroy coordinates are valid
-                if (destroyRow >= 0 && destroyRow < board.length && destroyCol >= 0 && destroyCol < board[0].length) {
-                    board[destroyRow][destroyCol] = 'D';  // Mark the destroyed case with 'D'
-                    System.out.println("Case at (" + destroyRow + ", " + destroyCol + ") has been destroyed");
-                }
-                else {
-                    System.out.println("Invalid coordinates");  // If the coordinates are invalid
+                // Repeatedly ask the user for valid coordinates to destroy a case
+                while (true) {
+                     Board.showBoard(board);
+                    System.out.println("Where would you like to destroy a case? Enter row and column (e.g., 2 3): ");
+
+                    // Check if both inputs are integers
+                    if (scanner.hasNextInt()) {
+                        destroyRow = scanner.nextInt();
+
+                        if (scanner.hasNextInt()) {
+                            destroyCol = scanner.nextInt();
+
+                            // Check if the destroy coordinates are within the board's boundaries
+                            if (destroyRow >= 0 && destroyRow < board.length && destroyCol >= 0 && destroyCol < board[0].length) {
+                                board[destroyRow][destroyCol] = 'D';  // Mark the destroyed case with 'D'
+                                System.out.println("Case at (" + destroyRow + ", " + destroyCol + ") has been destroyed");
+                                break;  // Exit the loop once valid destruction is done
+                            } else {
+                                System.out.println("Invalid coordinates. Coordinates must be within the board boundaries.");
+                            }
+                        } else {
+                            System.out.println("Invalid input for column. Please enter an integer.");
+                            scanner.next(); // Consume the invalid input
+                        }
+                    } else {
+                        System.out.println("Invalid input for row. Please enter an integer.");
+                        scanner.next(); // Consume the invalid input
+                    }
                 }
 
                 return new int[]{newRow, newCol};  // Return the new position
