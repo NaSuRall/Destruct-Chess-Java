@@ -7,10 +7,10 @@ public class Game {
         // Create the game board with 10 rows and 11 columns
         char[][] board = Board.CreateBoard(11, 12);
 
-        // Place Player 1 on the board at position (5, 6)
-        Player.placePlayer(board, '1', 5, 6);
-        // Place Player 2 on the board at position (6, 6)
-        Player.placePlayer(board, '2', 6, 6);
+        // Place Player 1 on the board at position (4, 5)
+        Player.placePlayer(board, '1', 4, 5);
+        // Place Player 2 on the board at position (5, 5)
+        Player.placePlayer(board, '2', 5, 5);
 
         // Show the board after placing the players
         Board.showBoard(board);

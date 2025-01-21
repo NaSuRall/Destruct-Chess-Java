@@ -17,7 +17,7 @@ public class Board {
         // Display the column numbers at the top
         System.out.print("   ");  // Add padding for alignment
         for (int col = 1; col < board[0].length; col++) {
-            System.out.print("["+ col + "]");  // Print each column number
+            System.out.print(col + "  ");  // Print each column number
         }
         System.out.println();  // Go to the next line
 
