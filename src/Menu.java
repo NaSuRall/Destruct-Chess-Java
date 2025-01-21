@@ -16,8 +16,8 @@ public class Menu {
                 switch (choix) {
                     case 1:
                         System.out.println("The game will begin");
-                        Player.requestPlayerName();
-                        Game.main();
+                        String[] playersNames=Player.requestPlayerName();
+                        Game.main(playersNames);
                         break;
 
                     case 2:

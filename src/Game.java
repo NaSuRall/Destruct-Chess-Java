@@ -2,7 +2,7 @@ import java.util.Random;
 
 public class Game {
 
-    public static void main () {
+    public static void main (String[] playerNames) {
 
         // Create the game board with 10 rows and 11 columns
         char[][] board = Board.CreateBoard(10,11);
@@ -28,10 +28,10 @@ public class Game {
 
             // Display whose turn it is
             if (isPlayer1Turn) {
-                System.out.println("Player1's turn");
+                System.out.println(playerNames[0] + "'s turn");
             }
             else {
-                System.out.println("Player2's turn");
+                System.out.println(playerNames[1] + "'s turn");
             }
 
             // Determine the current player's symbol and their current position
