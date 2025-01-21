@@ -16,7 +16,7 @@ public class Menu {
                 switch (choix) {
                     case 1:
                         System.out.println("The game will begin");
-                        // Appeler la fonction showBoard
+                        PlayerManager.requestPlayerName();
                         break;
 
                     case 2:
