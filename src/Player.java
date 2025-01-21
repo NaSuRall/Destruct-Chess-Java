@@ -30,3 +30,16 @@ public class Player {
         return playerNames;
     }
 }
+
+
+//Fonction `requestPlayerName` :
+//    - Créer un tableau pour stocker les noms des joueurs.
+//    - Boucler 2 fois :
+//        - Demander un nom au joueur.
+//        - Tant que le nom est invalide :
+//            - Afficher un message d'erreur.
+//            - Redemander un nom.
+//        - Ajouter le nom dans le tableau.
+//        - Afficher un message de confirmation.
+//    - Retourner le tableau.
+//  Fin de la fonction
