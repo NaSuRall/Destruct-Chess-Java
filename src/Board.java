@@ -14,14 +14,24 @@ public class Board {
 
     // Display the rows and columns of the board
     public static void showBoard(char[][] board) {
-        System.out.println(" "); // Print an empty line before showing the board
-        // Loop through each row in the board
+        // Display the column numbers at the top
+        System.out.print("   ");  // Add padding for alignment
+        for (int col = 0; col < board[0].length; col++) {
+            System.out.print("["+ col + "]");  // Print each column number
+        }
+        System.out.println();  // Go to the next line
+
+        // Print a separator
+        System.out.println("  -----------------------------");
+
+        // Display each row of the board with row numbers at the beginning
         for (int i = 0; i < board.length; i++) {
-            // Loop through each column in the current row
+            System.out.print(i + " | ");  // Print the row number at the beginning of the row
             for (int j = 0; j < board[i].length; j++) {
-                System.out.print("[" + board[i][j] + "]"); // Display each cell in a bracketed format: [ ]
+                System.out.print("[" + board[i][j] + "]");  // Print the cell contents
             }
-            System.out.println(); // Move to the next line after each row is displayed
+            System.out.println();  // Move to the next line after printing the row
         }
     }
 }
+
