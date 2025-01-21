@@ -1,4 +1,6 @@
 public class Board {
+
+    // Create the rows and columns of the board
     public static char[][] CreateBoard (int rows, int cols) {
         char[][] board = new char[rows][cols];
         for (int i = 0; i < rows; i++) {
@@ -9,6 +11,7 @@ public class Board {
         return board;
     }
 
+    // Show the rows and columns of the board
     public static void showBoard(char[][] board) {
         System.out.println(" ");
         for (int i = 0; i < board.length; i++) {
