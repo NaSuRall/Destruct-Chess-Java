@@ -70,7 +70,9 @@ public class Cell {
                                 try {
                                     destroyCol = Integer.parseInt(colStr);  // Convert the column into a number
                                 } catch (NumberFormatException e) {
-                                    System.out.println("Invalid column. Please enter a number between 1 and 11.");
+                                    // Handle the invalid number input but continue asking the user
+                                    System.out.println("Invalid column format. Please enter a valid column number between 1 and 10.");
+                                    destroyInput = scanner.next().toUpperCase();  // Prompt again for valid input
                                     continue;
                                 }
 
@@ -82,10 +84,10 @@ public class Cell {
                                         validInput = true;
                                     }
                                 } else {
-                                    System.out.println("Invalid coordinates, please enter a valid row (A-K) and column (1-11).");
+                                    System.out.println("Invalid coordinates, please enter a valid row (A-J) and column (1-10).");
                                 }
                             } else {
-                                System.out.println("Invalid input, please enter a valid row (A-K) and column (1-11).");
+                                System.out.println("Invalid input, please enter a valid row (A-J) and column (1-10).");
                             }
                         } else {
                             System.out.println("Invalid input, please enter the coordinates in the correct format (e.g., A1, B3).");
