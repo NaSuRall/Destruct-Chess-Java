@@ -3,10 +3,8 @@ import java.util.Random;
 public class Game {
 
     public static void main(String[] playerNames) {
-
         // Create the game board with 10 rows and 11 columns
         char[][] board = Board.CreateBoard(11, 12);
-
         // Place Player 1 on the board at position (5, 6)
         Player.placePlayer(board, '1', 5, 6);
         // Place Player 2 on the board at position (6, 6)
