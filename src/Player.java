@@ -8,6 +8,9 @@ public class Player {
         // Place the player at the specified row and column
         board[row][col] = playerSymbol; // Place the player in the cell
     }
+
+
+
     public static String[] requestPlayerName(){
         Scanner scanner = new Scanner(System.in);
         String[] playerNames = new String[2];

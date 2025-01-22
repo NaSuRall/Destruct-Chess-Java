@@ -11,7 +11,6 @@ public class Board {
         }
         return board; // Return the created board
     }
-
     // Display the rows and columns of the board
     public static void showBoard(char[][] board) {
         // Display the column numbers at the top
