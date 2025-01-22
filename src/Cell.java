@@ -67,16 +67,16 @@ public class Cell {
                         String colStr = destroyInput.substring(1);  // Get column part as string (01, 02, ..., 11)
 
 
-                        if (rowChar >= 'A' && rowChar < 'A' + board.length) {  // Si la ligne est valide (A, B, C, ...)
-                            destroyRow = rowChar - 'A';  // Convertir la lettre en un nombre (A -> 0, B -> 1, etc.)
+                        if (rowChar >= 'A' && rowChar < 'A' + board.length) {  // If the row is valid (A, B, C, ...)
+                            destroyRow = rowChar - 'A';  // Convert the letter into a number (A -> 0, B -> 1, etc.)
                             try {
-                                destroyCol = Integer.parseInt(colStr);  // Convertir la colonne en un nombre
+                                destroyCol = Integer.parseInt(colStr);  // Convert the column into a number
                             } catch (NumberFormatException e) {
-                                System.out.println("Invalid column. Please enter a number between 1 and 11 .");
+                                System.out.println("Invalid column. Please enter a number between 1 and 11.");
                                 continue;
                             }
 
-                            if (destroyRow >= 0 && destroyRow < board.length && destroyCol >= 0 && destroyCol < board[0].length) {
+                        if (destroyRow >= 0 && destroyRow < board.length && destroyCol >= 0 && destroyCol < board[0].length) {
                                 if (destroyRow == 0 && destroyCol == 0) {
                                     System.out.println("Invalide coordinate");
                                     validInput = false;
