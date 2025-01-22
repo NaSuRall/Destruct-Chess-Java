@@ -43,9 +43,11 @@ public class Game {
                 if (isPlayer1Turn) {
                     System.out.println(playerNames[0] + " is blocked and has lost!");
                     System.out.println(playerNames[1] + " wins the game!");
+                    System.out.println(" ");
                 } else {
                     System.out.println(playerNames[1] + " is blocked and has lost!");
                     System.out.println(playerNames[0] + " wins the game!");
+                    System.out.println(" ");
                 }
                 break;
             }
