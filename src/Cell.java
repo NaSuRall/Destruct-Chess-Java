@@ -77,12 +77,7 @@ public class Cell {
                                 }
 
                                 if (destroyRow >= 0 && destroyRow < board.length && destroyCol >= 0 && destroyCol < board[0].length) {
-                                    if (destroyRow == 0 && destroyCol == 0) {
-                                        System.out.println("Invalid coordinate");
-                                        validInput = false;
-                                    } else {
-                                        validInput = true;
-                                    }
+                                    validInput = true;
                                 } else {
                                     System.out.println("Invalid coordinates, please enter a valid row (A-J) and column (1-10).");
                                 }

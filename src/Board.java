@@ -11,7 +11,7 @@ public class Board {
         char[][] board = new char[rows][cols]; // Initialize the board with the specified number of rows and columns
         // Loop through each row and column
         for (int i = 0; i < rows; i++) {
-            for (int j = 1; j < cols; j++) {
+            for (int j = 0; j < cols; j++) {
                 board[i][j] = '.'; // Initialize each cell with a '.'
             }
         }
@@ -21,7 +21,7 @@ public class Board {
     public static void showBoard(char[][] board) {
         // Display the column numbers at the top
         System.out.print("   ");  // Add padding for alignment
-        for (int col = 1; col < board[0].length; col++) {
+        for (int col = 0; col < board[0].length; col++) {
             System.out.print(col + "  ");  // Print each column number
         }
         System.out.println();  // Go to the next line
@@ -29,7 +29,7 @@ public class Board {
         // Print each row of the board with row letters
         for (int i = 0; i < board.length; i++) {
             System.out.print((char) ('A' + i) + " ");  // Print the row letter at the start of the row
-            for (int j = 1; j < board[i].length; j++) {
+            for (int j = 0; j < board[i].length; j++) {
                 // Apply colors based on the content of the cell
                 if (board[i][j] == '1') {
                     System.out.print(GREEN + "[" + board[i][j] + "]" + RESET); // Player 1 in green
