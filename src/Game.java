@@ -14,9 +14,9 @@ public class Game {
            short ScorePlayer2 = 0;
            short ScorePlayer1 = 0;
         // Place Player 1 on the board at position (5, 6)
-        Player.placePlayer(board, '1', 5, 6);
+        Player.placePlayer(board, '1', 4, 5);
         // Place Player 2 on the board at position (6, 6)
-        Player.placePlayer(board, '2', 6, 6);
+        Player.placePlayer(board, '2', 5, 5);
 
         // Show the board after placing the players
         Board.showBoard(board);
@@ -26,8 +26,8 @@ public class Game {
         boolean isPlayer1Turn = random.nextBoolean(); // true means it's Player1's turn, false means Player2's turn
 
         // Initial positions of the players
-        int player1Row = 5, player1Col = 6;
-        int player2Row = 6, player2Col = 6;
+        int player1Row = 4, player1Col = 5;
+        int player2Row = 5, player2Col = 5;
 
         // Start a loop for the game (keep running until a win condition or defeat condition is met)
         while (true) {
