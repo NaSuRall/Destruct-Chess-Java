@@ -6,9 +6,6 @@ public class Cell {
     public static int[] MovePlayer(char[][] board, char player, int currentRow, int currentCol) {
         Scanner scanner = new Scanner(System.in);
 
-        short score = 0;
-
-
         // Ask the player to move
         System.out.println("Move (Z = up, Q = left, S = down, D = right): ");
         String input = scanner.next();
@@ -42,7 +39,6 @@ public class Cell {
             case 'D':
                 newCol++;
                 break; // Right
-
         }
 
         // Validate the move
@@ -53,56 +49,64 @@ public class Cell {
 
                 Board.showBoard(board);
 
-                // Ask the player to destroy a cell
-                System.out.println("Where would you like to destroy a case? Enter row and column: ");
-                String destroyInput = scanner.next().toUpperCase();
-                int destroyRow = -1;
-                int destroyCol = -1;
+                // Loop until the player chooses a valid cell to destroy
+                boolean validDestruction = false;
+                while (!validDestruction) {
+                    // Ask the player to destroy a cell
+                    System.out.println("Where would you like to destroy a case? Enter row and column: ");
+                    String destroyInput = scanner.next().toUpperCase();
+                    int destroyRow = -1;
+                    int destroyCol = -1;
 
-                // Validate the row and column input
-                boolean validInput = false;
-                while (!validInput) {
-                    if (destroyInput.length() >= 2 && destroyInput.length() <= 3) {
-                        char rowChar = destroyInput.charAt(0);
-                        String colStr = destroyInput.substring(1);  // Get column part as string (01, 02, ..., 11)
+                    // Validate the row and column input
+                    boolean validInput = false;
+                    while (!validInput) {
+                        if (destroyInput.length() >= 2 && destroyInput.length() <= 3) {
+                            char rowChar = destroyInput.charAt(0);
+                            String colStr = destroyInput.substring(1);  // Get column part as string (01, 02, ..., 11)
 
-
-                        if (rowChar >= 'A' && rowChar < 'A' + board.length) {  // If the row is valid (A, B, C, ...)
-                            destroyRow = rowChar - 'A';  // Convert the letter into a number (A -> 0, B -> 1, etc.)
-                            try {
-                                destroyCol = Integer.parseInt(colStr);  // Convert the column into a number
-                            } catch (NumberFormatException e) {
-                                System.out.println("Invalid column. Please enter a number between 1 and 11.");
-                                continue;
-                            }
-
-                        if (destroyRow >= 0 && destroyRow < board.length && destroyCol >= 0 && destroyCol < board[0].length) {
-                                if (destroyRow == 0 && destroyCol == 0) {
-                                    System.out.println("Invalide coordinate");
-                                    validInput = false;
+                            if (rowChar >= 'A' && rowChar < 'A' + board.length) {  // If the row is valid (A, B, C, ...)
+                                destroyRow = rowChar - 'A';  // Convert the letter into a number (A -> 0, B -> 1, etc.)
+                                try {
+                                    destroyCol = Integer.parseInt(colStr);  // Convert the column into a number
+                                } catch (NumberFormatException e) {
+                                    System.out.println("Invalid column. Please enter a number between 1 and 11.");
+                                    continue;
                                 }
-                                else {
-                                    validInput = true;
+
+                                if (destroyRow >= 0 && destroyRow < board.length && destroyCol >= 0 && destroyCol < board[0].length) {
+                                    if (destroyRow == 0 && destroyCol == 0) {
+                                        System.out.println("Invalid coordinate");
+                                        validInput = false;
+                                    } else {
+                                        validInput = true;
+                                    }
+                                } else {
+                                    System.out.println("Invalid coordinates, please enter a valid row (A-K) and column (1-11).");
                                 }
                             } else {
-                                System.out.println("Invalid coordinates, please enter a valid row (A-K) and column (1-11.");
+                                System.out.println("Invalid input, please enter a valid row (A-K) and column (1-11).");
                             }
                         } else {
-                            System.out.println("Invalid input, please enter a valid row (A-K) and column (1-11).");
+                            System.out.println("Invalid input, please enter the coordinates in the correct format (e.g., A1, B3).");
                         }
-                    } else {
-                        System.out.println("Invalid input, please enter the coordinates in the correct format (e.g., A1, B3).");
+
+                        if (!validInput) {
+                            destroyInput = scanner.next().toUpperCase();  // Prompt again if invalid input
+                        }
                     }
 
-                    if (!validInput) {
-                        destroyInput = scanner.next().toUpperCase();  // Prompt again if invalid input
+                    // Check if the cell is occupied by a player before destruction
+                    if (board[destroyRow][destroyCol] != '.' && board[destroyRow][destroyCol] != 'D') {
+                        Board.showBoard(board);
+                        System.out.println("Cannot destroy a cell occupied by a player.");
+                    } else {
+                        // Destroy the cell
+                        board[destroyRow][destroyCol] = 'D'; // Destroy the cell
+                        System.out.println("Case at (" + destroyRow + ", " + destroyCol + ") has been destroyed");
+                        validDestruction = true; // Exit the loop once a valid cell is destroyed
                     }
                 }
-
-                // Destroy the cell
-                board[destroyRow][destroyCol] = 'D'; // Destroy the cell
-                System.out.println("Case at (" + destroyRow + ", " + destroyCol + ") has been destroyed");
-
 
                 return new int[]{newRow, newCol}; // Return the new position
             } else {

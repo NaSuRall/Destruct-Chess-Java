@@ -10,7 +10,7 @@ public class Game {
 
     public static void main(String[] playerNames) {
         // Create the game board with 10 rows and 11 columns
-        char[][] board = Board.CreateBoard(11, 12);
+        char[][] board = Board.CreateBoard(10, 11);
            short ScorePlayer2 = 0;
            short ScorePlayer1 = 0;
         // Place Player 1 on the board at position (5, 6)
