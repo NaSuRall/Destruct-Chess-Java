@@ -41,7 +41,6 @@ public class Menu {
                         int numberPlayer = Player.requestPartyNumber();
                         Player.createPlayers(numberPlayer);
                         // we call the function that asks the user for their nickname
-
                         // and we call the function to start the game
                       //  Game.main(Player);
                         break;
