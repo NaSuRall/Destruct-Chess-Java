@@ -1,16 +1,18 @@
 import java.util.Random;
+ // Exemple de package
 
 public class Game {
 
-    public static void main(String[] playerNames) {
+    public static void main(String[] args) {
         // Create the game board with 10 rows and 11 columns
         char[][] board = Board.CreateBoard(11, 12);
-           short ScorePlayer2 = 0;
-           short ScorePlayer1 = 0;
+
         // Place Player 1 on the board at position (5, 6)
         Player.placePlayer(board, '1', 5, 6);
         // Place Player 2 on the board at position (6, 6)
         Player.placePlayer(board, '2', 6, 6);
+
+
 
         // Show the board after placing the players
         Board.showBoard(board);
@@ -28,10 +30,10 @@ public class Game {
 
             // Display whose turn it is
             if (isPlayer1Turn) {
-                System.out.println(playerNames[0] + "'s turn");
+                System.out.println(Player[1] + "'s turn");
 
             } else {
-                System.out.println(playerNames[1] + "'s turn");
+                System.out.println(Player[1] + "'s turn");
             }
 
             // Determine the current player's symbol and their current position
@@ -41,26 +43,20 @@ public class Game {
 
             if (Cell.checkIfPlayerLost(board, currentRow, currentCol)) {
                 if (isPlayer1Turn) {
-                    System.out.println(playerNames[0] + " is blocked and has lost!");
-                    System.out.println(playerNames[1] + " wins the game!");
+                    System.out.println( + " is blocked and has lost!");
+                    System.out.println(Player[1] + " wins the game!");
                     System.out.println(" ");
-                    ScorePlayer2 += 10;
-                    ScorePlayer1 -= 0;
-                    System.out.println("Score : " + playerNames[1] + ScorePlayer2);
-                    System.out.println("Score : " + playerNames[0] + ": " + ScorePlayer1);
+
                 } else {
-                    System.out.println(playerNames[1] + " is blocked and has lost!");
-                    System.out.println(playerNames[0] + " wins the game!");
+                    System.out.println(Player[1] + " is blocked and has lost!");
+                    System.out.println(Player[0] + " wins the game!");
                     System.out.println(" ");
-                    ScorePlayer1 += 5;
-                    ScorePlayer2 -= 2;
-                    System.out.println("Score : "+ playerNames[0] + ScorePlayer1);
-                    System.out.println("Score : " + playerNames[1] + ": " + ScorePlayer2);
+
                 }
                 break;
             }
 
-            // Flag to track if the move is valid or not
+            // Flag to track if the move is valid or no t
             boolean validMove = false;
 
             // Continue asking for a valid move until it's made
@@ -86,16 +82,32 @@ public class Game {
                     // If the move is invalid, show the board and ask the same player to try again
                     Board.showBoard(board);
                     if (isPlayer1Turn) {
-                        System.out.println(playerNames[0] + "'s turn");
+                        System.out.println(Player[0] + "'s turn");
 
                     } else {
-                        System.out.println(playerNames[1] + "'s turn");
+                        System.out.println(Player[1] + "'s turn");
                     }
                 }
             }
 
+
+
+
             // Switch turns between the players after a valid move
-            isPlayer1Turn = !isPlayer1Turn;
+//            isPlayer1Turn = !isPlayer1Turn;
+//
+//            Player monJoueur = new Player();
+//            monJoueur.pseudo = "toutou";
+//            monJoueur.score = 3;
+//
+//
+//            Player[2] lesPlayers;
+//            lesPlayers[0] = monJoueur;
+//
+//            lesPlayers[0].score = 10;
+//
+
+
         }
     }
 

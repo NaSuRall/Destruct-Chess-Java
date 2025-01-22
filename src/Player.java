@@ -1,10 +1,24 @@
-import java.sql.SQLOutput;
-import java.util.Arrays;
 import java.util.Scanner;
+public class Player{
 
-public class Player {
+    private String pseudo;
+    private int score;
 
-    // Method to place a player on the board at a specific position
+    // Constructeur pour initialiser un joueur
+    public Player(String pseudo) {
+        this.pseudo = pseudo;
+        this.score = 0;
+    }
+
+    public String getPseudo() {
+        return pseudo;
+    }
+
+    public int getScore() {
+        return score;
+    }
+
+
     public static void placePlayer(char[][] board, char playerSymbol, int row, int col) {
 
         // Place the player at the specified row and column
@@ -12,45 +26,52 @@ public class Player {
     }
 
 
+    public static int requestPartyNumber() {
+        Scanner scanner = new Scanner(System.in);
+        byte numberOfPlayers;
 
-    // Function to request player names
-    public static String[] requestPlayerName() {
-            Scanner scanner = new Scanner(System.in);
+        System.out.println("Please enter the number of players you would like to play (2 - 4):");
 
-            // Array to store the names of the 2 players
-            String[] playerNames = new String[2];
+        while (true) {
+            try {
+                numberOfPlayers = Byte.parseByte(scanner.nextLine());
+                if (numberOfPlayers >= 2 && numberOfPlayers <= 4) {
+                    return numberOfPlayers;
+                } else {
+                    System.out.println("Please enter a valid number between 2 and 4.");
+                }
+            } catch (NumberFormatException e) {
+                System.out.println("Please enter a valid number.");
+            }
+        }
+    }
 
-            // Loop to request valid names for both players
-            for (short i = 0; i < 2; i++) {
-                System.out.println("Enter the name of player " + (i + 1) + ":");
-                String userName = scanner.nextLine();
+    public static Player[] createPlayers(int numberOfPlayers) {
+        Scanner scanner = new Scanner(System.in);
+        Player[] players = new Player[numberOfPlayers];
 
-                // While the entered name is invalid, keep asking
-                // Valid name: 2-10 characters / unique name
-                while (userName.length() < 2 || userName.length() > 10 || (userName.equals(playerNames[0]))) {
-                    if (userName.length() < 2 || userName.length() > 10) {
-                        System.out.println("The name must be between 2 and 10 characters. Please try again:");
-                    } else {
-                        System.out.println("The name is already taken. Please try again:");
-                    }
-                    userName = scanner.nextLine();
+        for (int i = 0; i < numberOfPlayers; i++) {
+            String pseudo;
+            boolean validPseudo;
+
+            do {
+                validPseudo = true;
+                System.out.println("Enter Player " + (i + 1) + " name (2-10 characters):");
+                pseudo = scanner.nextLine();
+
+                if (pseudo.length() < 2 || pseudo.length() > 10) {
+                    System.out.println("The name must be between 2 and 10 characters. Please try again.");
+                    validPseudo = false;
                 }
 
-                // Add the name to the playerNames array
-                playerNames[i] = userName;
-                System.out.println("Player " + (i + 1) + " is now: " + playerNames[i]);
-            }
+            } while (!validPseudo);
 
-            // Return the array of player names
-            System.out.println("--------------------------------------");
-            System.out.println("Player List : ");
-            System.out.println(Arrays.toString(playerNames));
-            System.out.println("--------------------------------------");
-            return playerNames;
+            players[i] = new Player(pseudo);
+            System.out.println("Player " + (i + 1) + " is now " + pseudo + ".");
+        }
+
+        return players;
     }
 
 
-
 }
-
-
