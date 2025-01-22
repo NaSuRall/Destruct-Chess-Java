@@ -6,7 +6,7 @@ public class Board {
         // Loop through each row and column
         for (int i = 0; i < rows; i++) {
             for (int j = 0; j < cols; j++) {
-                board[i][j] = '*'; // Initialize each cell with a blank space
+                board[i][j] = '*'; // Initialize each cell with a *
             }
         }
         return board; // Return the created board

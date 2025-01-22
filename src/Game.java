@@ -7,10 +7,10 @@ public class Game {
         // Create the game board with 10 rows and 11 columns
         char[][] board = Board.CreateBoard(11, 12);
 
-        // Place Player 1 on the board at position (4, 5)
-        Player.placePlayer(board, '1', 4, 5);
-        // Place Player 2 on the board at position (5, 5)
-        Player.placePlayer(board, '2', 5, 5);
+        // Place Player 1 on the board at position (5, 6)
+        Player.placePlayer(board, '1', 5, 6);
+        // Place Player 2 on the board at position (6, 6)
+        Player.placePlayer(board, '2', 6, 6);
 
         // Show the board after placing the players
         Board.showBoard(board);
@@ -20,8 +20,8 @@ public class Game {
         boolean isPlayer1Turn = random.nextBoolean(); // true means it's Player1's turn, false means Player2's turn
 
         // Initial positions of the players
-        int player1Row = 4, player1Col = 5;
-        int player2Row = 5, player2Col = 5;
+        int player1Row = 5, player1Col = 6;
+        int player2Row = 6, player2Col = 6;
 
         // Start a loop for the game (keep running until a win condition or defeat condition is met)
         while (true) {
@@ -29,6 +29,7 @@ public class Game {
             // Display whose turn it is
             if (isPlayer1Turn) {
                 System.out.println(playerNames[0] + "'s turn");
+
             } else {
                 System.out.println(playerNames[1] + "'s turn");
             }

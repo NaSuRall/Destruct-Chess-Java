@@ -27,17 +27,25 @@ public class Cell {
         int newCol = currentCol;
 
         switch (move) {
-            case 'Z': newRow--; break; // Up
-            case 'Q': newCol--; break; // Left
-            case 'S': newRow++; break; // Down
-            case 'D': newCol++; break; // Right
+            case 'Z':
+                newRow--;
+                break; // Up
+            case 'Q':
+                newCol--;
+                break; // Left
+            case 'S':
+                newRow++;
+                break; // Down
+            case 'D':
+                newCol++;
+                break; // Right
 
         }
 
         // Validate the move
         if (newRow >= 0 && newRow < board.length && newCol >= 0 && newCol < board[0].length) {
             if (board[newRow][newCol] == '*') { // The cell is available
-                board[currentRow][currentCol] = '*'; // Empty the old position
+                board[currentRow][currentCol] = '*'; // Clear the old position
                 board[newRow][newCol] = player; // Place the player on the new position
 
                 Board.showBoard(board);
@@ -55,12 +63,13 @@ public class Cell {
                         if (scanner.hasNextInt()) {
                             destroyCol = scanner.nextInt();
                             // Check if the coordinates are valid
-                            if (destroyRow >= 0 && destroyRow < board.length && destroyCol >= 0 && destroyCol < board[0].length) {
+                            if (destroyRow > 0 && destroyRow < board.length && destroyCol > 0 && destroyCol < board[0].length) {
                                 validInput = true; // Valid coordinates
                             } else {
                                 System.out.println("Invalid coordinates, please enter row and column within the board size.");
                             }
                         } else {
+                            System.out.println("Please enter a valid number for column.");
                             scanner.nextLine(); // Clear the invalid input
                         }
                     } else {
