@@ -13,6 +13,7 @@ public class Game {
         char[][] board = Board.CreateBoard(10, 11);
            short ScorePlayer2 = 0;
            short ScorePlayer1 = 0;
+
         // Place Player 1 on the board at position (5, 6)
         Player.placePlayer(board, '1', 4, 5);
         // Place Player 2 on the board at position (6, 6)
