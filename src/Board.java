@@ -37,7 +37,10 @@ public class Board {
                     System.out.print(BLUE + "[" + board[i][j] + "]" + RESET);  // Player 2 in blue
                 } else if (board[i][j] == 'D') {
                     System.out.print(RED + "[" + board[i][j] + "]" + RESET);   // Destroyed cell in red
-                } else {
+                } else if (board[i][j] == '3') {
+                    System.out.print(BLUE + "[" + board[i][j] + "]" + RESET);
+                }
+                else {
                     System.out.print("[" + board[i][j] + "]"); // Normal cell
                 }
             }

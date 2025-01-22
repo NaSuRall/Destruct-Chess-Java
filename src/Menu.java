@@ -37,12 +37,10 @@ public class Menu {
                 //we check the user input and see what it corresponds to
                 switch (choix) {
                     case 1:
-                        System.out.println("The game will begin");
-                        int numberPlayer = Player.requestPartyNumber();
-                        Player.createPlayers(numberPlayer);
-                        // we call the function that asks the user for their nickname
-                        // and we call the function to start the game
-                      //  Game.main(Player);
+                        System.out.println("The game will begin.");
+                        int numberOfPlayers = Player.requestPartyNumber();
+                        Player[] players = Player.createPlayers(numberOfPlayers);
+                        Game.main(players);
                         break;
 
                     case 2:
