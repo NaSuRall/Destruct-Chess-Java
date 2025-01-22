@@ -55,29 +55,47 @@ public class Cell {
 
                 // Ask the player to destroy a cell
                 System.out.println("Where would you like to destroy a case? Enter row and column: ");
+                String destroyInput = scanner.next().toUpperCase();
                 int destroyRow = -1;
                 int destroyCol = -1;
 
                 // Validate the row and column input
                 boolean validInput = false;
                 while (!validInput) {
-                    if (scanner.hasNextInt()) {
-                        destroyRow = scanner.nextInt();
-                        if (scanner.hasNextInt()) {
-                            destroyCol = scanner.nextInt();
-                            // Check if the coordinates are valid
-                            if (destroyRow > 0 && destroyRow < board.length && destroyCol > 0 && destroyCol < board[0].length) {
-                                validInput = true; // Valid coordinates
+                    if (destroyInput.length() >= 2 && destroyInput.length() <= 3) {
+                        char rowChar = destroyInput.charAt(0);
+                        String colStr = destroyInput.substring(1);  // Get column part as string (01, 02, ..., 11)
+
+
+                        if (rowChar >= 'A' && rowChar < 'A' + board.length) {  // Si la ligne est valide (A, B, C, ...)
+                            destroyRow = rowChar - 'A';  // Convertir la lettre en un nombre (A -> 0, B -> 1, etc.)
+                            try {
+                                destroyCol = Integer.parseInt(colStr);  // Convertir la colonne en un nombre
+                            } catch (NumberFormatException e) {
+                                System.out.println("Invalid column. Please enter a number between 1 and 11 .");
+                                continue;
+                            }
+
+                            if (destroyRow >= 0 && destroyRow < board.length && destroyCol >= 0 && destroyCol < board[0].length) {
+                                if (destroyRow == 0 && destroyCol == 0) {
+                                    System.out.println("Invalide coordinate");
+                                    validInput = false;
+                                }
+                                else {
+                                    validInput = true;
+                                }
                             } else {
-                                System.out.println("Invalid coordinates, please enter row and column within the board size.");
+                                System.out.println("Invalid coordinates, please enter a valid row (A-K) and column (1-11.");
                             }
                         } else {
-                            System.out.println("Please enter a valid number for column.");
-                            scanner.nextLine(); // Clear the invalid input
+                            System.out.println("Invalid input, please enter a valid row (A-K) and column (1-11).");
                         }
                     } else {
-                        System.out.println("Please enter a valid number for row.");
-                        scanner.nextLine(); // Clear the invalid input
+                        System.out.println("Invalid input, please enter the coordinates in the correct format (e.g., A1, B3).");
+                    }
+
+                    if (!validInput) {
+                        destroyInput = scanner.next().toUpperCase();  // Prompt again if invalid input
                     }
                 }
 
