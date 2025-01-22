@@ -1,3 +1,5 @@
+import java.sql.SQLOutput;
+import java.util.Arrays;
 import java.util.Scanner;
 
 public class Player {
@@ -8,38 +10,47 @@ public class Player {
         // Place the player at the specified row and column
         board[row][col] = playerSymbol; // Place the player in the cell
     }
-    public static String[] requestPlayerName(){
-        Scanner scanner = new Scanner(System.in);
-        String[] playerNames = new String[2];
 
-        for (short i = 0; i < 2; i++) {
-            System.out.println("Entrez le nom du joueur " + (i + 1) + " :");
-            String userName = scanner.nextLine();
 
-            while (userName.length() < 2 || userName.length() > 10 || (userName.equals(playerNames[0]))) {
-                if (userName.length() < 2 || userName.length() > 10) {
-                    System.out.println("Le pseudo doit contenir entre 2 et 10 caractères. Réessayez :");
-                } else {
-                    System.out.println("Le pseudo est déjà pris. Réessayez :");
+
+    // Function to request player names
+    public static String[] requestPlayerName() {
+            Scanner scanner = new Scanner(System.in);
+
+            // Array to store the names of the 2 players
+            String[] playerNames = new String[2];
+
+            // Loop to request valid names for both players
+            for (short i = 0; i < 2; i++) {
+                System.out.println("Enter the name of player " + (i + 1) + ":");
+                String userName = scanner.nextLine();
+
+                // While the entered name is invalid, keep asking
+                // Valid name: 2-10 characters / unique name
+                while (userName.length() < 2 || userName.length() > 10 || (userName.equals(playerNames[0]))) {
+                    if (userName.length() < 2 || userName.length() > 10) {
+                        System.out.println("The name must be between 2 and 10 characters. Please try again:");
+                    } else {
+                        System.out.println("The name is already taken. Please try again:");
+                    }
+                    userName = scanner.nextLine();
                 }
-                userName = scanner.nextLine();
+
+                // Add the name to the playerNames array
+                playerNames[i] = userName;
+                System.out.println("Player " + (i + 1) + " is now: " + playerNames[i]);
             }
-            playerNames[i] = userName;
-            System.out.println("Joueur " + (i + 1) + " est maintenant : " + playerNames[i]);
-        }
-        return playerNames;
+
+            // Return the array of player names
+            System.out.println("--------------------------------------");
+            System.out.println("Player List : ");
+            System.out.println(Arrays.toString(playerNames));
+            System.out.println("--------------------------------------");
+            return playerNames;
     }
+
+
+
 }
 
 
-//Fonction `requestPlayerName` :
-//    - Créer un tableau pour stocker les noms des joueurs.
-//    - Boucler 2 fois :
-//        - Demander un nom au joueur.
-//        - Tant que le nom est invalide :
-//            - Afficher un message d'erreur.
-//            - Redemander un nom.
-//        - Ajouter le nom dans le tableau.
-//        - Afficher un message de confirmation.
-//    - Retourner le tableau.
-//  Fin de la fonction

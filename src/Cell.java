@@ -6,6 +6,9 @@ public class Cell {
     public static int[] MovePlayer(char[][] board, char player, int currentRow, int currentCol) {
         Scanner scanner = new Scanner(System.in);
 
+        short score = 0;
+
+
         // Ask the player to move
         System.out.println("Move (Z = up, Q = left, S = down, D = right): ");
         String input = scanner.next();

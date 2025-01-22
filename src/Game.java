@@ -9,10 +9,10 @@ public class Game {
     public static final String RED = "\u001B[31m";    // Red color for destroyed cells ('D')
 
     public static void main(String[] playerNames) {
-
         // Create the game board with 10 rows and 11 columns
         char[][] board = Board.CreateBoard(11, 12);
-
+           short ScorePlayer2 = 0;
+           short ScorePlayer1 = 0;
         // Place Player 1 on the board at position (5, 6)
         Player.placePlayer(board, '1', 5, 6);
         // Place Player 2 on the board at position (6, 6)
@@ -51,10 +51,18 @@ public class Game {
                     System.out.println(GREEN + playerNames[0] + RESET + " is blocked and has lost!");
                     System.out.println(BLUE + playerNames[1] + RESET + " wins the game!");
                     System.out.println(" ");
+                    ScorePlayer2 += 10;
+                    ScorePlayer1 -= 0;
+                    System.out.println("Score : " + playerNames[1] + ScorePlayer2);
+                    System.out.println("Score : " + playerNames[0] + ": " + ScorePlayer1);
                 } else {
                     System.out.println(BLUE + playerNames[1] + RESET + " is blocked and has lost!");
                     System.out.println(GREEN + playerNames[0] + RESET + " wins the game!");
                     System.out.println(" ");
+                    ScorePlayer1 += 5;
+                    ScorePlayer2 -= 2;
+                    System.out.println("Score : "+ playerNames[0] + ScorePlayer1);
+                    System.out.println("Score : " + playerNames[1] + ": " + ScorePlayer2);
                 }
                 break;
             }
