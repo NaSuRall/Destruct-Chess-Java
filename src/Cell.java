@@ -44,8 +44,8 @@ public class Cell {
 
         // Validate the move
         if (newRow >= 0 && newRow < board.length && newCol >= 0 && newCol < board[0].length) {
-            if (board[newRow][newCol] == '*') { // The cell is available
-                board[currentRow][currentCol] = '*'; // Clear the old position
+            if (board[newRow][newCol] == '.') { // The cell is available
+                board[currentRow][currentCol] = '.'; // Clear the old position
                 board[newRow][newCol] = player; // Place the player on the new position
 
                 Board.showBoard(board);
@@ -111,6 +111,6 @@ public class Cell {
         }
 
         // Check if the cell is occupied by 'D' or another invalid character
-        return board[row][col] != '*'; // Only '*' allows movement
+        return board[row][col] != '.'; // Only '*' allows movement
     }
 }

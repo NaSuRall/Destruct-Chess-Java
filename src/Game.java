@@ -2,6 +2,12 @@ import java.util.Random;
 
 public class Game {
 
+    // ANSI codes for colors
+    public static final String RESET = "\u001B[0m";   // Reset to default color
+    public static final String GREEN = "\u001B[32m";  // Green color for Player 1
+    public static final String BLUE = "\u001B[34m";   // Blue color for Player 2
+    public static final String RED = "\u001B[31m";    // Red color for destroyed cells ('D')
+
     public static void main(String[] playerNames) {
 
         // Create the game board with 10 rows and 11 columns
@@ -26,12 +32,13 @@ public class Game {
         // Start a loop for the game (keep running until a win condition or defeat condition is met)
         while (true) {
 
+
             // Display whose turn it is
             if (isPlayer1Turn) {
-                System.out.println(playerNames[0] + "'s turn");
+                System.out.println(GREEN + playerNames[0] + RESET + "'s turn");
 
             } else {
-                System.out.println(playerNames[1] + "'s turn");
+                System.out.println(BLUE + playerNames[1] + RESET +"'s turn");
             }
 
             // Determine the current player's symbol and their current position
@@ -41,12 +48,12 @@ public class Game {
 
             if (Cell.checkIfPlayerLost(board, currentRow, currentCol)) {
                 if (isPlayer1Turn) {
-                    System.out.println(playerNames[0] + " is blocked and has lost!");
-                    System.out.println(playerNames[1] + " wins the game!");
+                    System.out.println(GREEN + playerNames[0] + RESET + " is blocked and has lost!");
+                    System.out.println(BLUE + playerNames[1] + RESET + " wins the game!");
                     System.out.println(" ");
                 } else {
-                    System.out.println(playerNames[1] + " is blocked and has lost!");
-                    System.out.println(playerNames[0] + " wins the game!");
+                    System.out.println(BLUE + playerNames[1] + RESET + " is blocked and has lost!");
+                    System.out.println(GREEN + playerNames[0] + RESET + " wins the game!");
                     System.out.println(" ");
                 }
                 break;
@@ -78,10 +85,10 @@ public class Game {
                     // If the move is invalid, show the board and ask the same player to try again
                     Board.showBoard(board);
                     if (isPlayer1Turn) {
-                        System.out.println(playerNames[0] + "'s turn");
+                        System.out.println(GREEN + playerNames[0] + RESET + "'s turn");
 
                     } else {
-                        System.out.println(playerNames[1] + "'s turn");
+                        System.out.println(BLUE + playerNames[1] + RESET +"'s turn");
                     }
                 }
             }
