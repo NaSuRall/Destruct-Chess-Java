@@ -82,12 +82,6 @@ public class Cell {
                 board[destroyRow][destroyCol] = 'D'; // Destroy the cell
                 System.out.println("Case at (" + destroyRow + ", " + destroyCol + ") has been destroyed");
 
-                // Check if the opponent is blocked (GAME OVER CONDITION)
-                if (checkIfPlayerLost(board, currentRow, currentCol)) {
-                    Board.showBoard(board);
-                    System.out.println("Player at position (" + currentRow + ", " + currentCol + ") is blocked and has lost!");
-                    Main.main(null);
-                }
 
                 return new int[]{newRow, newCol}; // Return the new position
             } else {

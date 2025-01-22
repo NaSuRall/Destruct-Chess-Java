@@ -39,6 +39,17 @@ public class Game {
             int currentRow = isPlayer1Turn ? player1Row : player2Row;
             int currentCol = isPlayer1Turn ? player1Col : player2Col;
 
+            if (Cell.checkIfPlayerLost(board, currentRow, currentCol)) {
+                if (isPlayer1Turn) {
+                    System.out.println(playerNames[0] + " is blocked and has lost!");
+                    System.out.println(playerNames[1] + " wins the game!");
+                } else {
+                    System.out.println(playerNames[1] + " is blocked and has lost!");
+                    System.out.println(playerNames[0] + " wins the game!");
+                }
+                break;
+            }
+
             // Flag to track if the move is valid or not
             boolean validMove = false;
 
@@ -66,6 +77,7 @@ public class Game {
                     Board.showBoard(board);
                     if (isPlayer1Turn) {
                         System.out.println(playerNames[0] + "'s turn");
+
                     } else {
                         System.out.println(playerNames[1] + "'s turn");
                     }
