@@ -138,20 +138,22 @@ public class Menu {
                 // Get the sub-menu choice
                 subChoice = Byte.parseByte(scanner.nextLine());
 
-                // Initialize players variable
-                int numberOfPlayers = Player.requestPartyNumber();
-                Player[] players = Player.createPlayers(numberOfPlayers);
-
                 switch (subChoice) {
                     case 1:
                         // Start a new game
                         System.out.println("The game is about to start.");
+                        // Initialize players variable
+                        int numberOfPlayers = Player.requestPartyNumber();
+                        Player[] players = Player.createPlayers(numberOfPlayers);
                         Game.main(players);
                         return; // Return to the main menu after the game
                     case 2:
                         // Special mode
                         System.out.println("The game is about to start.");
-                        AcceleratedGame.main(players);
+                        // Initialize players variable
+                        int numberOfPlayers2 = Player.requestPartyNumber();
+                        Player[] players2 = Player.createPlayers(numberOfPlayers2);
+                        AcceleratedGame.main(players2);
                         return; // Return to the main menu
 
                     default:
