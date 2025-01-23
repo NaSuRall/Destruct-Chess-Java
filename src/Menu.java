@@ -1,5 +1,22 @@
 import java.util.Scanner;
 
+/*
+    as long as no input is correct:
+        we ask the user to enter a number to perform an action
+            we check if the user enters a number
+            if yes:
+                if their choice=1:
+                    we start the game
+                if their choice=2
+                    we display the rules
+                if their choice=3
+                    we stop the program
+                by default:
+                    we inform the user that they must enter a number between 1 and 3
+            if not:
+                we inform the user that they must enter a number
+ */
+
 public class Menu {
     public static void menu() {
         // Create the scanner
@@ -12,8 +29,9 @@ public class Menu {
             System.out.println("To choose an option, type a number");
             System.out.println("1. Choose a game mode");
             System.out.println("2. Read the rules");
-            System.out.println("3. Exit the game");
+            System.out.println("3. Exit game");
 
+            //we try to convert the user input into a byte
             try {
                 // Attempt to convert user input into a byte
                 choice = Byte.parseByte(scanner.nextLine());
@@ -39,12 +57,59 @@ public class Menu {
                         scanner.close();
                         return;
 
+                    case 4 :
+                        System.out.println("1. show scores");
+                        System.out.println("2. show ascending scores");
+                        System.out.println("3. show descending scores");
+                        int choix2;
+                        try{
+                            choix2 = Byte.parseByte(scanner.nextLine());
+                            switch (choix2){
+                                case 1:
+                                    int[] scoresArray = Player.loadScoresFromFile("Scores-Games.txt");
+
+                                    // Afficher le tableau avant le tri
+                                    System.out.println("Contenu du fichier avant le tri :");
+                                    for (int score : scoresArray) {
+                                        System.out.println(score);
+                                    }
+                                    break;
+
+                                case 2:
+                                    int[] scoresArray2 = Player.loadScoresFromFile("Scores-Games.txt");
+                                    sort.mergeSort(scoresArray2);
+                                    // Afficher le tableau avant le tri
+                                    System.out.println("Contenu du fichier avant le tri :");
+                                    for (int score : scoresArray2) {
+                                        System.out.println(score);
+                                    }
+                                    break;
+                                case 3:
+                                    int[] scoresArray3 = Player.loadScoresFromFile("Scores-Games.txt");
+                                    sort.descending(scoresArray3);
+                                    // Afficher le tableau avant le tri
+                                    System.out.println("Contenu du fichier avant le tri :");
+                                    for (int score : scoresArray3) {
+                                        System.out.println(score);
+                                    }
+                                    break;
+                                default:
+                                    System.out.println("Invalid choice: choose a number between 1 and 3");
+                                    break;
+                            }
+                        }
+                        catch (NumberFormatException e){
+                            System.out.println("Error: Please enter a valid number.");
+                        }
+                    // default establishes a case to inform the user that their input is incorrect
                     default:
+                        System.out.println("Invalid choice: choose a number between 1 and 4");
                         // Message for invalid choice
                         System.out.println("Invalid choice: please choose a number between 1 and 3.");
                         break;
                 }
 
+                //if we cannot convert their input, we display an error message
             } catch (NumberFormatException e) {
                 // Error if the input is not a valid number
                 System.out.println("Error: please enter a valid number.");
