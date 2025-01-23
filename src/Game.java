@@ -92,26 +92,29 @@ public class Game {
                 }
 
                 // Envoie dans le fichier txt
-                try (BufferedWriter writer = new BufferedWriter(new FileWriter("Scores.txt", true))) {
-                    // Write the current player's score
-                    writer.write(currentPlayer.getPseudo() + " score: " + currentPlayer.getScore());
+
+                try (BufferedWriter writer = new BufferedWriter(new FileWriter("Scores-Games.txt", true))) {
+                    // Ajouter le score du joueur ayant perdu
+                    writer.write(currentPlayer.getPseudo() + " has lost! New score: " + currentPlayer.getScore());
                     writer.newLine();
 
-                    // Write the scores of other players
+                    // Ajouter les scores des autres joueurs
                     for (int i = 0; i < players.length; i++) {
                         if (i != currentPlayerIndex) {
                             writer.write(players[i].getPseudo() + " score: " + players[i].getScore());
                             writer.newLine();
                         }
                     }
-                    System.out.println("Scores successfully written to Scores Games.txt");
+
+                    // Ajout d'une ligne pour délimiter les événements
+                    writer.write("---- End of Event ----");
+                    writer.newLine();
                 } catch (IOException e) {
-                    System.err.println("An error occurred while writing scores to the file: " + e.getMessage());
+                    System.err.println("Erreur lors de l'écriture dans le fichier : " + e.getMessage());
                 }
 
                 break; // End the game
             }
-
             // Effectuer le mouvement du joueur
             boolean validMove = false;
             while (!validMove) {

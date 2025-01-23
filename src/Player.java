@@ -18,6 +18,11 @@ public class Player{
         return score;
     }
 
+    // Function pour recuperer les scores du fichier Score Game.txt
+
+
+
+
     public void updateScore(int points) {
         this.score += points;
     }
@@ -63,8 +68,8 @@ public class Player{
                 System.out.println("Enter Player " + (i + 1) + " name (2-10 characters):");
                 pseudo = scanner.nextLine();
 
-                if (pseudo.length() < 2 || pseudo.length() > 10) {
-                    System.out.println("The name must be between 2 and 10 characters. Please try again.");
+                if (pseudo.length() < 2 || pseudo.length() > 10 || (i > 0 && pseudo.equals(players[0].getPseudo()))) {
+                    System.out.println("The name must be between 2 and 10 characters and different from Player 1's name. Please try again.");
                     validPseudo = false;
                 }
 
@@ -73,6 +78,7 @@ public class Player{
             players[i] = new Player(pseudo);
             System.out.println("Player " + (i + 1) + " is now " + pseudo + ".");
         }
+
 
         return players;
     }
