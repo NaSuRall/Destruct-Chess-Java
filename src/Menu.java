@@ -30,6 +30,7 @@ public class Menu {
             System.out.println("1. Start game");
             System.out.println("2. Read the rules");
             System.out.println("3. Exit game");
+            System.out.println("4. Scores");
 
             //we try to convert the user input into a byte
             try {
@@ -59,6 +60,14 @@ public class Menu {
                         //we return nothing to stop the function and thus stop the program
                         return;
 
+                    case 4 :
+                        String[] scoresArray = Player.loadFileAsArray("Scores-Games.txt");
+                        // Afficher le tableau avant le tri
+                        System.out.println("Contenu du fichier avant le tri :");
+                        for (String score : scoresArray) {
+                            System.out.println(score);
+                        }
+                        break;
                     // default establishes a case to inform the user that their input is incorrect
                     default:
                         System.out.println("Invalid choice: choose a number between 1 and 3");
