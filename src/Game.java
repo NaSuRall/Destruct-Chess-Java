@@ -5,37 +5,51 @@ import java.util.Random;
 
 public class Game {
 
-    // Codes de couleur ANSI pour afficher les couleurs dans la console
+    // ANSI color codes for displaying colors in the console
     public static final String RESET = "\u001B[0m";
-    public static final String GREEN = "\u001B[32m";  // Couleur verte pour le joueur 1
-    public static final String BLUE = "\u001B[34m";   // Couleur bleue pour le joueur 2
-    public static final String YELLOW = "\u001B[33m";  // Couleur jaune pour le joueur 3
-    public static final String PURPLE = "\u001B[35m";  // Couleur violette pour le joueur 4
+    public static final String GREEN = "\u001B[32m";  // Green color for Player 1
+    public static final String BLUE = "\u001B[34m";   // Blue color for Player 2
+    public static final String YELLOW = "\u001B[33m";  // Yellow color for Player 3
+    public static final String PURPLE = "\u001B[35m";  // Purple color for Player 4
 
     public static void main(Player... players) {
-        // Crée un plateau de jeu avec 10 lignes et 11 colonnes
+        // Create a game board with 10 rows and 11 columns
         char[][] board = Board.CreateBoard(10, 11);
 
-        // Placer les joueurs aux coordonnées fixes sur le plateau
-        if (players.length > 0) Player.placePlayer(board, '1', 4, 4); // Joueur 1 en E4
-        if (players.length > 1) Player.placePlayer(board, '2', 5, 4); // Joueur 2 en E5
-        if (players.length > 2) Player.placePlayer(board, '3', 4, (5)); // Joueur 3 en F4
-        if (players.length > 3) Player.placePlayer(board, '4', 5, 5); // Joueur 4 en F5
+        // Manually place players on fixed positions on the board
+        // These positions are now stored for each player, instead of using fixed currentRow/col.
+        int[][] playerPositions = new int[players.length][2];
+        if (players.length > 0) {
+            Player.placePlayer(board, '1', 4, 4); // Player 1 at E4
+            playerPositions[0] = new int[] {4, 4}; // Store position for Player 1
+        }
+        if (players.length > 1) {
+            Player.placePlayer(board, '2', 5, 4); // Player 2 at E5
+            playerPositions[1] = new int[] {5, 4}; // Store position for Player 2
+        }
+        if (players.length > 2) {
+            Player.placePlayer(board, '3', 4, 5); // Player 3 at F4
+            playerPositions[2] = new int[] {4, 5}; // Store position for Player 3
+        }
+        if (players.length > 3) {
+            Player.placePlayer(board, '4', 5, 5); // Player 4 at F5
+            playerPositions[3] = new int[] {5, 5}; // Store position for Player 4
+        }
 
-
-        // Afficher le plateau après avoir placé les joueurs
+        // Display the board after placing the players
         Board.showBoard(board);
 
-        // Choisir aléatoirement le premier joueur
+        // Randomly select the first player
         Random random = new Random();
-        int currentPlayerIndex = random.nextInt(players.length); // Sélection aléatoire
+        int currentPlayerIndex = random.nextInt(players.length); // Random selection
 
-        boolean[] isEliminated = new boolean[players.length]; // Tableau pour savoir quels joueurs sont éliminés
+        // Create an array to track which players are eliminated
+        boolean[] isEliminated = new boolean[players.length];
 
-        // Boucle du jeu (tour par tour)
+        // Main game loop (turn by turn)
         while (true) {
 
-            // Compte combien de joueurs ne sont pas éliminés
+            // Count how many players are still in the game (not eliminated)
             int remainingPlayers = 0;
             for (int i = 0; i < isEliminated.length; i++) {
                 if (!isEliminated[i]) {
@@ -43,17 +57,17 @@ public class Game {
                 }
             }
 
-            // Si un seul joueur reste, il gagne
+            // If only one player remains, they win
             if (remainingPlayers == 1) {
                 for (int i = 0; i < players.length; i++) {
                     if (!isEliminated[i]) {
-                        System.out.println(players[i].getPseudo() + RESET + " est le gagnant !");
-                        return; // Fin du jeu
+                        System.out.println(players[i].getPseudo() + RESET + " is the winner!");
+                        return; // End the game
                     }
                 }
             }
 
-            // Si le joueur est éliminé, on passe son tour
+            // If the current player is eliminated, skip their turn
             if (isEliminated[currentPlayerIndex]) {
                 currentPlayerIndex = (currentPlayerIndex + 1) % players.length;
                 continue;
@@ -61,7 +75,7 @@ public class Game {
 
             Player currentPlayer = players[currentPlayerIndex];
 
-            // Déterminer la couleur du joueur
+            // Determine the color associated with the current player
             String currentColor = "";
             switch (currentPlayerIndex) {
                 case 0: currentColor = GREEN; break;
@@ -70,35 +84,34 @@ public class Game {
                 case 3: currentColor = PURPLE; break;
             }
 
-            // Afficher le tour du joueur avec sa couleur
+            // Display the player's turn with their associated color
             System.out.println(currentColor + currentPlayer.getPseudo() + RESET + "'s turn");
 
-            // Récupérer la position actuelle à partir des coordonnées manuelles
-            int currentRow = (currentPlayerIndex == 0 || currentPlayerIndex == 2) ? 3 : 4;
-            int currentCol = (currentPlayerIndex == 0 || currentPlayerIndex == 1) ? 4 : 5;
+            // Get the current position from the playerPositions array
+            int currentRow = playerPositions[currentPlayerIndex][0];
+            int currentCol = playerPositions[currentPlayerIndex][1];
 
-            // Vérifie si le joueur est bloqué
+            // Check if the player is blocked (lost the game)
             if (Cell.checkIfPlayerLost(board, currentRow, currentCol)) {
                 System.out.println(currentColor + currentPlayer.getPseudo() + RESET + " is blocked and has lost!");
-                currentPlayer.updateScore(-2);
+                currentPlayer.updateScore(-2); // Deduct points for losing
                 System.out.println(currentPlayer.getPseudo() + " new score: " + currentPlayer.getScore());
 
-                // Annonce des joueurs restants
+                // Update the scores for the remaining players
                 for (int i = 0; i < players.length; i++) {
                     if (i != currentPlayerIndex && !Cell.checkIfPlayerLost(board, currentRow, currentCol)) {
-                        players[i].updateScore(5);
+                        players[i].updateScore(5); // Award points for other players
                         System.out.println(players[i].getPseudo() + " new score: " + players[i].getScore());
                     }
                 }
 
-                // Envoie dans le fichier txt
-
+                // Write the game results to a file
                 try (BufferedWriter writer = new BufferedWriter(new FileWriter("Scores-Games.txt", true))) {
-                    // Ajouter le score du joueur ayant perdu
+                    // Write the lost player's score
                     writer.write(currentPlayer.getPseudo() + " has lost! New score: " + currentPlayer.getScore());
                     writer.newLine();
 
-                    // Ajouter les scores des autres joueurs
+                    // Write the scores of the remaining players
                     for (int i = 0; i < players.length; i++) {
                         if (i != currentPlayerIndex) {
                             writer.write(players[i].getPseudo() + " score: " + players[i].getScore());
@@ -106,36 +119,41 @@ public class Game {
                         }
                     }
 
-                    // Ajout d'une ligne pour délimiter les événements
+                    // Add a separator for the end of the game event
                     writer.write("---- End of Event ----");
                     writer.newLine();
                 } catch (IOException e) {
-                    System.err.println("Erreur lors de l'écriture dans le fichier : " + e.getMessage());
+                    // Handle any exceptions during file writing
+                    System.err.println("Error writing to the file: " + e.getMessage());
                 }
 
                 break; // End the game
             }
-            // Effectuer le mouvement du joueur
+
+            // Perform the player's move
             boolean validMove = false;
             while (!validMove) {
                 int[] newPosition = Cell.MovePlayer(board, (char) ('1' + currentPlayerIndex), currentRow, currentCol);
 
-                // Si le mouvement est valide, mettre à jour la position du joueur sur le plateau
+                // If the move is valid, update the player's position on the board and in the playerPositions array
                 if (newPosition != null) {
                     currentRow = newPosition[0];
                     currentCol = newPosition[1];
                     validMove = true;
 
-                    // Afficher le plateau mis à jour
+                    // Update the player's position
+                    playerPositions[currentPlayerIndex] = newPosition;
+
+                    // Display the updated board
                     Board.showBoard(board);
                 } else {
-                    // Si le mouvement est invalide, redemander à ce joueur de jouer
+                    // If the move is invalid, prompt the player to try again
                     Board.showBoard(board);
                     System.out.println(currentColor + currentPlayer.getPseudo() + RESET + "'s turn");
                 }
             }
 
-            // Passer au joueur suivant
+            // Move to the next player
             currentPlayerIndex = (currentPlayerIndex + 1) % players.length;
         }
     }
