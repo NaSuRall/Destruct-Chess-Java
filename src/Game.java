@@ -92,7 +92,7 @@ public class Game {
 
                 // Envoie dans le fichier txt
 
-                try (BufferedWriter writer = new BufferedWriter(new FileWriter("Scores Games.txt", true))) {
+                try (BufferedWriter writer = new BufferedWriter(new FileWriter("Scores-Games.txt", true))) {
                     // Ajouter le score du joueur ayant perdu
                     writer.write(currentPlayer.getPseudo() + " has lost! New score: " + currentPlayer.getScore());
                     writer.newLine();
@@ -114,7 +114,6 @@ public class Game {
 
                 break; // End the game
             }
-
             // Effectuer le mouvement du joueur
             boolean validMove = false;
             while (!validMove) {
