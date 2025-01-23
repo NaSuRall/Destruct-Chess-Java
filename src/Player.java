@@ -54,17 +54,7 @@ public class Player {
      * @param filePath The path to the file containing the scores.
      * @throws IOException If an error occurs while reading the file.
      */
-    public static void displayAllScores(String filePath) {
-        try (BufferedReader reader = new BufferedReader(new FileReader(filePath))) {
-            System.out.println("Content of Scores-Games.txt:");
-            String line;
-            while ((line = reader.readLine()) != null) {
-                System.out.println(line);
-            }
-        } catch (Exception e) {
-            System.out.println("An error occurred while reading the file: " + e.getMessage());
-        }
-    }
+
 
     /**
      * Loads scores from a file and stores them in an integer array.
@@ -74,6 +64,19 @@ public class Player {
      * @return An array of integers containing the scores.
      * @throws IOException If an error occurs while reading the file.
      */
+
+    // Function retour tab de Int name : loadScoresFromFile parametre nom du fichier a lire
+    // boucle try nouvelle obj reader qui va lire le fichier
+    // crée un tableau scores avec 100 cases libre
+    // lit des lignes depuis un fichier ou une source textuelle grace a reader
+    // Vérifier si la ligne lue contient le mot clé "score:"
+    // la ligne contient "score:" Découper la ligne autour du texte "score: ". Cela divise la ligne en deux parties :
+    //Tout ce qui est avant "score: "
+    //Tout ce qui est après "score: "
+    // Si line = "Player1 score: 10", alors :
+    //parts[0] = "Player1 "
+    //parts[1] = "10"
+
     public static int[] loadScoresFromFile(String filePath) {
         try (BufferedReader reader = new BufferedReader(new FileReader(filePath))) {
             int[] scores = new int[100];
@@ -124,6 +127,15 @@ public class Player {
      *
      * @return The number of players.
      */
+
+    // Function requestOartyNumber retourne un int
+    // initialisation de la variable des numberOfPlayers
+    // boucle while
+            // requete 1 : Demmande combien de Joueur il y aura dans la partie;
+            // verification d'un nombra valide (2-4)
+        // si c'est un caractere print enter number valide
+    // fin de fonction
+
     public static int requestPartyNumber() {
         Scanner scanner = new Scanner(System.in);
         byte numberOfPlayers;
@@ -152,6 +164,17 @@ public class Player {
      * @param numberOfPlayers The number of players.
      * @return An array of {@link Player} objects.
      */
+
+    // Fonction qui retourn un Tableau d'obj Joueurs name : createPlayers parametre nombre de joueur
+    // Initialisation Tableau Player[] players
+    // boucle For le nombre de joueurs
+    // Entrer le nom du joueur
+    // verification si valide ou pas
+    // EASTER EGG clement (AXEL QUI A MODIFIER CA )
+    //verification si pseudo entre 2 et 10 characters et different du premier
+    // inserer le pseudo valide dans tab players
+    // renvoyer le tableau
+
     public static Player[] createPlayers(int numberOfPlayers) {
         Scanner scanner = new Scanner(System.in);
         Player[] players = new Player[numberOfPlayers];
