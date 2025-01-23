@@ -18,6 +18,10 @@ public class Player{
         return score;
     }
 
+    public void updateScore(int points) {
+        this.score += points;
+    }
+
 
     public static void placePlayer(char[][] board, char playerSymbol, int row, int col) {
 

@@ -9,6 +9,8 @@ public class Game {
     public static void main(Player... players) {
         // Crée un plateau de jeu avec 10 lignes et 11 colonnes
         char[][] board = Board.CreateBoard(10, 11);
+        short ScorePlayer2 = 0;
+        short ScorePlayer1 = 0;
 
         // Positions fixes des joueurs (Joueur 1 sur E4, Joueur 2 en dessous, Joueur 3 à côté de Joueur 1, Joueur 4 à côté de Joueur 3)
         int[][] fixedPositions = {
@@ -20,6 +22,7 @@ public class Game {
 
         // Placer les joueurs sur le plateau à leurs positions respectives
         int[][] playerPositions = new int[players.length][2];
+        Random random = new Random();
         for (int i = 0; i < players.length; i++) {
             playerPositions[i][0] = fixedPositions[i][0];
             playerPositions[i][1] = fixedPositions[i][1];
@@ -75,6 +78,23 @@ public class Game {
 
             // Vérifie si le joueur est bloqué
             if (Cell.checkIfPlayerLost(board, currentRow, currentCol)) {
+                System.out.println(COLORS[currentPlayerIndex % COLORS.length] + currentPlayer.getPseudo() + RESET + " is blocked and has lost!");
+                System.out.println("Remaining players:");
+                currentPlayer.updateScore(-2);
+                System.out.println(currentPlayer.getPseudo() + "new score: " + currentPlayer.getScore());
+
+                // Announce remaining players
+                for (int i = 0; i < players.length; i++) {
+                    if (i != currentPlayerIndex && !Cell.checkIfPlayerLost(board, playerPositions[i][0], playerPositions[i][1])) {
+                        players[i].updateScore(5);
+                        System.out.println(players[i].getPseudo() + " new score: " + players[i].getScore());
+
+                    }
+                }
+
+
+                //System.out.println(players[0].getPseudo() + players[0]);
+                break; // End the game
                 System.out.println(COLORS[currentPlayerIndex] + currentPlayer.getPseudo() + RESET + " est bloqué et a perdu!");
                 isEliminated[currentPlayerIndex] = true; // Marque le joueur comme éliminé
                 currentPlayerIndex = (currentPlayerIndex + 1) % players.length; // Passe au joueur suivant
@@ -83,15 +103,19 @@ public class Game {
 
             // Effectuer le mouvement du joueur
             boolean validMove = false;
+
+            // Continue asking for a valid move until it's made
             while (!validMove) {
+                // Ask the player to make a move and get the new position
                 int[] newPosition = Cell.MovePlayer(board, (char) ('1' + currentPlayerIndex), currentRow, currentCol);
 
+                // If the move is valid, update the player's position on the board
                 if (newPosition != null) {
                     playerPositions[currentPlayerIndex][0] = newPosition[0];
                     playerPositions[currentPlayerIndex][1] = newPosition[1];
                     validMove = true;
 
-                    // Affiche le plateau après le mouvement
+                    // Display the updated board
                     Board.showBoard(board);
                 } else {
                     // Si le mouvement est invalide, on redemande à ce joueur de jouer
@@ -102,6 +126,7 @@ public class Game {
 
             // Passer au joueur suivant
             currentPlayerIndex = (currentPlayerIndex + 1) % players.length;
+
         }
     }
 }
