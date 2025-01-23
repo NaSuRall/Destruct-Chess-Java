@@ -53,7 +53,7 @@ public class Player{
             // Créer un objet pour lire le fichier
             BufferedReader reader = new BufferedReader(new FileReader(filePath));
             String line;
-            int[] scores = new int[10]; // Tableau pour stocker les scores (taille initiale de 10)
+            int[] scores = new int[100]; // Tableau pour stocker les scores (taille initiale de 10)
             int index = 0; // Compteur pour ajouter les scores au tableau
 
             // Lire chaque ligne du fichier

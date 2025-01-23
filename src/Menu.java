@@ -70,18 +70,19 @@ public class Menu {
 
                                     // Afficher le tableau avant le tri
                                     System.out.println("Contenu du fichier avant le tri :");
-                                    for (int score : scoresArray) {
-                                        System.out.println(score);
+                                    System.out.println("Les 10 premiers scores du fichier :");
+                                    for (int i = 0; i < 10 && i < scoresArray.length; i++) {
+                                        System.out.println(scoresArray[i]); // Afficher chaque score
                                     }
                                     break;
 
                                 case 2:
                                     int[] scoresArray2 = Player.loadScoresFromFile("Scores-Games.txt");
-                                    sort.mergeSort(scoresArray2);
-                                    // Afficher le tableau avant le tri
-                                    System.out.println("Contenu du fichier avant le tri :");
-                                    for (int score : scoresArray2) {
-                                        System.out.println(score);
+
+                                    // Afficher les 10 premiers scores
+                                    System.out.println("Les 10 premiers scores du fichier :");
+                                    for (int i = 0; i < 10 && i < scoresArray2.length; i++) {
+                                        System.out.println(scoresArray2[i]); // Afficher chaque score
                                     }
                                     break;
                                 case 3:
@@ -89,8 +90,9 @@ public class Menu {
                                     sort.descending(scoresArray3);
                                     // Afficher le tableau avant le tri
                                     System.out.println("Contenu du fichier avant le tri :");
-                                    for (int score : scoresArray3) {
-                                        System.out.println(score);
+                                    System.out.println("Les 10 premiers scores du fichier :");
+                                    for (int i = 0; i < 10 && i < scoresArray3.length; i++) {
+                                        System.out.println(scoresArray3[i]); // Afficher chaque score
                                     }
                                     break;
                                 default:
