@@ -63,6 +63,9 @@ public class Game {
                         System.out.println(COLORS[i % COLORS.length] + players[i].getPseudo() + RESET);
                     }
                 }
+                currentPlayer.score=-2;
+                //System.out.println(players[0].getPseudo() + players[0]);
+                System.out.println(currentPlayer.getScore());
                 break; // End the game
             }
 

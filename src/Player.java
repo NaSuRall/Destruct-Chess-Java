@@ -1,8 +1,8 @@
 import java.util.Scanner;
 public class Player{
 
-    private String pseudo;
-    private int score;
+    public String pseudo;
+    public int score;
 
     // Constructeur pour initialiser un joueur
     public Player(String pseudo) {
