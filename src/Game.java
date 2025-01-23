@@ -1,3 +1,6 @@
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.Random;
 
 public class Game {
@@ -68,6 +71,23 @@ public class Game {
                     }
                 }
 
+                // Envoie dans le fichier txt
+                try (BufferedWriter writer = new BufferedWriter(new FileWriter("Scores.txt", true))) {
+                    // Write the current player's score
+                    writer.write(currentPlayer.getPseudo() + " score: " + currentPlayer.getScore());
+                    writer.newLine();
+
+                    // Write the scores of other players
+                    for (int i = 0; i < players.length; i++) {
+                        if (i != currentPlayerIndex) {
+                            writer.write(players[i].getPseudo() + " score: " + players[i].getScore());
+                            writer.newLine();
+                        }
+                    }
+                    System.out.println("Scores successfully written to Scores Games.txt");
+                } catch (IOException e) {
+                    System.err.println("An error occurred while writing scores to the file: " + e.getMessage());
+                }
 
                 //System.out.println(players[0].getPseudo() + players[0]);
                 break; // End the game
