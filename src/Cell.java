@@ -22,7 +22,7 @@ public class Cell {
             return null;
         }
 
-        // Calculate the new position
+        // Calculate the new position based on the player's move
         int newRow = currentRow;
         int newCol = currentCol;
 
@@ -41,18 +41,18 @@ public class Cell {
                 break; // Right
         }
 
-        // Validate the move
+        // Validate the move to ensure it stays within the board boundaries
         if (newRow >= 0 && newRow < board.length && newCol >= 0 && newCol < board[0].length) {
-            if (board[newRow][newCol] == '.') { // The cell is available
+            if (board[newRow][newCol] == '.') { // The cell is available for movement
                 board[currentRow][currentCol] = '.'; // Clear the old position
                 board[newRow][newCol] = player; // Place the player on the new position
 
-                Board.showBoard(board);
+                Board.showBoard(board); // Display the updated board
 
                 // Loop until the player chooses a valid cell to destroy
                 boolean validDestruction = false;
                 while (!validDestruction) {
-                    // Ask the player to destroy a cell
+                    // Ask the player to destroy a cell on the board
                     System.out.println("Where would you like to destroy a case? Enter row and column: ");
                     String destroyInput = scanner.next().toUpperCase();
                     int destroyRow = -1;
@@ -63,14 +63,14 @@ public class Cell {
                     while (!validInput) {
                         if (destroyInput.length() >= 2 && destroyInput.length() <= 3) {
                             char rowChar = destroyInput.charAt(0);
-                            String colStr = destroyInput.substring(1);  // Get column part as string (01, 02, ..., 11)
+                            String colStr = destroyInput.substring(1);  // Get the column part as a string (01, 02, ..., 11)
 
                             if (rowChar >= 'A' && rowChar < 'A' + board.length) {  // If the row is valid (A, B, C, ...)
-                                destroyRow = rowChar - 'A';  // Convert the letter into a number (A -> 0, B -> 1, etc.)
+                                destroyRow = rowChar - 'A';  // Convert the row letter into a number (A -> 0, B -> 1, etc.)
                                 try {
                                     destroyCol = Integer.parseInt(colStr);  // Convert the column into a number
                                 } catch (NumberFormatException e) {
-                                    // Handle the invalid number input but continue asking the user
+                                    // Handle invalid column input but continue asking for valid input
                                     System.out.println("Invalid column format. Please enter a valid column number between 1 and 10.");
                                     destroyInput = scanner.next().toUpperCase();  // Prompt again for valid input
                                     continue;
@@ -89,50 +89,51 @@ public class Cell {
                         }
 
                         if (!validInput) {
-                            destroyInput = scanner.next().toUpperCase();  // Prompt again if invalid input
+                            destroyInput = scanner.next().toUpperCase();  // Prompt again if input is invalid
                         }
                     }
 
-                    // Check if the cell is occupied by a player before destruction
-                    if (board[destroyRow][destroyCol] != '.' && board[destroyRow][destroyCol] != 'D') {
-                        Board.showBoard(board);
+                    // **Check**: if the cell is already destroyed (D), prevent further destruction
+                    if (board[destroyRow][destroyCol] == 'D') {
+                        System.out.println("Cannot destroy a cell that is already destroyed.");
+                    } else if (board[destroyRow][destroyCol] != '.' && board[destroyRow][destroyCol] != 'D') {
                         System.out.println("Cannot destroy a cell occupied by a player.");
                     } else {
-                        // Destroy the cell
-                        board[destroyRow][destroyCol] = 'D'; // Destroy the cell
+                        // Destroy the selected cell
+                        board[destroyRow][destroyCol] = 'D'; // Mark the cell as destroyed
                         System.out.println("Case at (" + destroyRow + ", " + destroyCol + ") has been destroyed");
                         validDestruction = true; // Exit the loop once a valid cell is destroyed
                     }
                 }
 
-                return new int[]{newRow, newCol}; // Return the new position
+                return new int[]{newRow, newCol}; // Return the new position after the move
             } else {
                 System.out.println("Case is occupied");
-                return null;
+                return null; // If the destination cell is occupied, return null
             }
         } else {
             System.out.println("Invalid move");
-            return null;
+            return null; // If the move is out of bounds, return null
         }
     }
 
-    // Method to check if the player has lost
+    // Method to check if the player has lost (if all adjacent cells are blocked)
     public static boolean checkIfPlayerLost(char[][] board, int currentRow, int currentCol) {
-        // Check all adjacent cells (up, down, left, right)
+        // Check all adjacent cells (up, down, left, right) to see if the player is blocked
         return isMoveBlocked(board, currentRow - 1, currentCol) &&  // Up
                 isMoveBlocked(board, currentRow + 1, currentCol) &&  // Down
                 isMoveBlocked(board, currentRow, currentCol - 1) &&  // Left
                 isMoveBlocked(board, currentRow, currentCol + 1);    // Right
     }
 
-    // Method to check if a move to a cell is blocked
+    // Method to check if a move to a specific cell is blocked
     private static boolean isMoveBlocked(char[][] board, int row, int col) {
         // Check if the cell is out of bounds
         if (row < 0 || row >= board.length || col < 0 || col >= board[0].length) {
-            return true; // Out of bounds means blocked
+            return true; // Out of bounds means the move is blocked
         }
 
-        // Check if the cell is occupied by 'D' or another invalid character
-        return board[row][col] != '.'; // Only '*' allows movement
+        // Check if the cell is occupied by 'D' or any other invalid character
+        return board[row][col] != '.'; // A cell occupied by anything other than '.' is considered blocked
     }
 }

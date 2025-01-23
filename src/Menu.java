@@ -1,73 +1,94 @@
 import java.util.Scanner;
 
-/*
-    as long as no input is correct:
-        we ask the user to enter a number to perform an action
-            we check if the user enters a number
-            if yes:
-                if their choice=1:
-                    we start the game
-                if their choice=2
-                    we display the rules
-                if their choice=3
-                    we stop the program
-                by default:
-                    we inform the user that they must enter a number between 1 and 3
-            if not:
-                we inform the user that they must enter a number
- */
-
 public class Menu {
     public static void menu() {
-        //we create a scanner
+        // Create the scanner
         Scanner scanner = new Scanner(System.in);
-        // and we initialize a choice variable
-        byte choix;
+        // Initialize the choice variable
+        byte choice;
 
-        //as long as a response is not valid we display the options and ask the user to enter a number
+        // Main loop of the menu
         while (true) {
-            System.out.println("To choose an option, tap a number ");
-            System.out.println("1. Start game");
+            System.out.println("To choose an option, type a number");
+            System.out.println("1. Choose a game mode");
             System.out.println("2. Read the rules");
-            System.out.println("3. Exit game");
+            System.out.println("3. Exit the game");
 
-            //we try to convert the user input into a byte
             try {
-                choix = Byte.parseByte(scanner.nextLine());
-                //we check the user input and see what it corresponds to
-                switch (choix) {
+                // Attempt to convert user input into a byte
+                choice = Byte.parseByte(scanner.nextLine());
+
+                switch (choice) {
                     case 1:
-                        System.out.println("The game will begin.");
-                        int numberOfPlayers = Player.requestPartyNumber();
-                        Player[] players = Player.createPlayers(numberOfPlayers);
-                        Game.main(players);
+                        // Display the sub-menu to start the game
+                        displaySubMenu(scanner);
                         break;
 
                     case 2:
-                        // we simply display the rules
+                        // Display the rules of the game
                         System.out.println("Rules:");
-                        System.out.println("During his turn a player can move his pawn one space (vertically or horizontally),");
-                        System.out.println("then he destroys a square on the board.");
+                        System.out.println("During their turn, a player can move their piece by one cell (vertically or horizontally),");
+                        System.out.println("then they destroy a cell on the board.");
                         System.out.println("The last player who can still move wins.");
-                        System.out.println("The winner wins 5 points and the loser loses 2 points.");
+                        System.out.println("The winner gains 5 points, and the loser loses 2 points.");
                         break;
 
                     case 3:
-                        System.out.println("See you next time");
-                        //we close the scanner to free up memory
+                        // Exit the game
+                        System.out.println("See you next time!");
                         scanner.close();
-                        //we return nothing to stop the function and thus stop the program
                         return;
 
-                    // default establishes a case to inform the user that their input is incorrect
                     default:
-                        System.out.println("Invalid choice: choose a number between 1 and 3");
+                        // Message for invalid choice
+                        System.out.println("Invalid choice: please choose a number between 1 and 3.");
                         break;
                 }
 
-                //if we cannot convert their input, we display an error message
             } catch (NumberFormatException e) {
-                System.out.println("Error: Please enter a valid number.");
+                // Error if the input is not a valid number
+                System.out.println("Error: please enter a valid number.");
+            }
+        }
+    }
+
+    // Method to display the sub-menu when option 1 is chosen
+    public static void displaySubMenu(Scanner scanner) {
+        byte subChoice;
+
+        while (true) {
+            System.out.println("Game mode");
+            System.out.println("1. Normal game");
+            System.out.println("2. Accelerated game");
+
+            try {
+                subChoice = Byte.parseByte(scanner.nextLine());
+
+                // INITIATE PLAYERS VARIABLE
+                int numberOfPlayers = Player.requestPartyNumber();
+                Player[] players = Player.createPlayers(numberOfPlayers);
+
+                switch (subChoice) {
+                    case 1:
+                        // Start a new game
+                        System.out.println("The game is about to start.");
+                        Game.main(players);
+                        return; // Return to the main menu after the game
+                    case 2:
+                        // Special mode
+                        System.out.println("The game is about to start.");
+                        AcceleratedGame.main(players);
+                        return; // Return to the main menu
+
+                    default:
+                        // Message for invalid choice
+                        System.out.println("Invalid choice: please choose a number between 1 and 3.");
+                        break;
+                }
+
+            } catch (NumberFormatException e) {
+                // Error if the input is not a valid number
+                System.out.println("Error: please enter a valid number.");
             }
         }
     }

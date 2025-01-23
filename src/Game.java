@@ -62,7 +62,7 @@ public class Game {
                 for (int i = 0; i < players.length; i++) {
                     if (!isEliminated[i]) {
                         System.out.println(players[i].getPseudo() + RESET + " is the winner!");
-                        return; // End the game
+                        Menu.menu();
                     }
                 }
             }

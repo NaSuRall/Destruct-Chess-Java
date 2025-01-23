@@ -4,3 +4,15 @@ cacaa score: 5
 caca has lost! New score: -2
 caacaaa score: 5
 ---- End of Event ----
+P2 has lost! New score: -2
+P1 score: 0
+---- End of Event ----
+P2 has lost! New score: -2
+P1 score: 0
+---- End of Event ----
+P1 has lost! New score: -2
+P2 score: 0
+---- End of Event ----
+P1 has lost! New score: -2
+P2 score: 0
+---- End of Event ----
