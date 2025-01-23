@@ -7,12 +7,14 @@ import java.util.Scanner;
             if yes:
                 if their choice=1:
                     we start the game
-                if their choice=2
+                if their choice=2:
                     we display the rules
-                if their choice=3
+                if their choice=3:
+                    we display the scores
+                if their choice=4:
                     we stop the program
                 by default:
-                    we inform the user that they must enter a number between 1 and 3
+                    we inform the user that they must enter a number between 1 and 4
             if not:
                 we inform the user that they must enter a number
  */
@@ -33,7 +35,7 @@ public class Menu {
             System.out.println("4. Exit game");
 
 
-            //we try to convert the user input into a byte
+            // we try to convert the user input into a byte
             try {
                 // Attempt to convert user input into a byte
                 choice = Byte.parseByte(scanner.nextLine());
@@ -60,60 +62,62 @@ public class Menu {
                         return;
 
                     case 3:
-                        System.out.println("1. show scores");
-                        System.out.println("2. show ascending scores");
-                        System.out.println("3. show descending scores");
+                        System.out.println("1. Show scores");
+                        System.out.println("2. Show ascending scores");
+                        System.out.println("3. Show descending scores");
                         int choix2;
-                        try{
+                        try {
+                            // Attempt to convert the user input for scores menu
                             choix2 = Byte.parseByte(scanner.nextLine());
-                            switch (choix2){
+                            switch (choix2) {
                                 case 1:
+                                    // Retrieve the data from the .txt file and put it into an array
                                     int[] scoresArray = Player.loadScoresFromFile("Scores-Games.txt");
-
-                                    // Afficher le tableau avant le tri
-                                    System.out.println("Contenu du fichier avant le tri :");
-                                    System.out.println("Les 10 premiers scores du fichier :");
+                                    System.out.println("The top 10 scores from the file:");
+                                    // Display the top 10 scores
                                     for (int i = 0; i < 10 && i < scoresArray.length; i++) {
-                                        System.out.println(scoresArray[i]); // Afficher chaque score
+                                        System.out.println(scoresArray[i]);
                                     }
                                     break;
 
                                 case 2:
+                                    // Retrieve the data from the .txt file and put it into an array
                                     int[] scoresArray2 = Player.loadScoresFromFile("Scores-Games.txt");
-
-                                    // Afficher les 10 premiers scores
-                                    System.out.println("Les 10 premiers scores du fichier :");
+                                    // Use merge sort to sort the scores
+                                    sort.mergeSort(scoresArray2);
+                                    System.out.println("The top 10 scores from the file:");
+                                    // Display the top 10 scores
                                     for (int i = 0; i < 10 && i < scoresArray2.length; i++) {
-                                        System.out.println(scoresArray2[i]); // Afficher chaque score
+                                        System.out.println(scoresArray2[i]);
                                     }
                                     break;
                                 case 3:
                                     int[] scoresArray3 = Player.loadScoresFromFile("Scores-Games.txt");
+                                    // Use insertion sort to sort the scores in descending order
                                     sort.descending(scoresArray3);
-                                    // Afficher le tableau avant le tri
-                                    System.out.println("Contenu du fichier avant le tri :");
-                                    System.out.println("Les 10 premiers scores du fichier :");
+                                    System.out.println("The top 10 scores from the file:");
+                                    // Display the top 10 scores
                                     for (int i = 0; i < 10 && i < scoresArray3.length; i++) {
-                                        System.out.println(scoresArray3[i]); // Afficher chaque score
+                                        System.out.println(scoresArray3[i]);
                                     }
                                     break;
                                 default:
+                                    // Inform the user of an invalid choice
                                     System.out.println("Invalid choice: choose a number between 1 and 3");
                                     break;
                             }
-                        }
-                        catch (NumberFormatException e){
+                        } catch (NumberFormatException e) {
+                            // Error if the input is not a valid number
                             System.out.println("Error: Please enter a valid number.");
                         }
-                    // default establishes a case to inform the user that their input is incorrect
+                        break;
+
                     default:
+                        // Inform the user of an invalid choice
                         System.out.println("Invalid choice: choose a number between 1 and 4");
-                        // Message for invalid choice
-                        System.out.println("Invalid choice: please choose a number between 1 and 3.");
                         break;
                 }
 
-                //if we cannot convert their input, we display an error message
             } catch (NumberFormatException e) {
                 // Error if the input is not a valid number
                 System.out.println("Error: please enter a valid number.");
@@ -131,9 +135,10 @@ public class Menu {
             System.out.println("2. Accelerated game");
 
             try {
+                // Get the sub-menu choice
                 subChoice = Byte.parseByte(scanner.nextLine());
 
-                // INITIATE PLAYERS VARIABLE
+                // Initialize players variable
                 int numberOfPlayers = Player.requestPartyNumber();
                 Player[] players = Player.createPlayers(numberOfPlayers);
 
@@ -150,8 +155,8 @@ public class Menu {
                         return; // Return to the main menu
 
                     default:
-                        // Message for invalid choice
-                        System.out.println("Invalid choice: please choose a number between 1 and 3.");
+                        // Inform the user of an invalid choice
+                        System.out.println("Invalid choice: please choose a number between 1 and 2.");
                         break;
                 }
 
