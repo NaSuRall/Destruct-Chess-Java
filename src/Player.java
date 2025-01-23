@@ -9,6 +9,7 @@ import java.util.Scanner;
  * and interact with game mechanics.
  */
 public class Player {
+    public static final String GREEN = "\u001B[32m";  // Green color for Player 1
 
     private String pseudo;
     private int score;
@@ -154,6 +155,21 @@ public class Player {
                 validPseudo = true;
                 System.out.println("Enter Player " + (i + 1) + " name (2-10 characters):");
                 pseudo = scanner.nextLine();
+
+                // EASTER EGG
+                if (pseudo.equalsIgnoreCase("Clement")) {
+                    while (true) {
+                        // ADD "Error" in green
+                        String glitchMessage = GREEN + "ERROR ";
+
+                        // Ajouter des caractères aléatoires
+                        for (i = 0; i < 10; i++) {
+                            char randomChar = (char) (33 + (Math.random() * 94)); // Générer un caractère aléatoire
+                            glitchMessage += randomChar; // Ajouter au message
+                        }
+                        System.out.println(glitchMessage); // Afficher le message
+                    }
+                }
 
                 if (pseudo.length() < 2 || pseudo.length() > 10 || (i > 0 && pseudo.equals(players[0].getPseudo()))) {
                     System.out.println("The name must be between 2 and 10 characters and different from Player 1's name. Please try again.");
