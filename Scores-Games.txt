@@ -1,4 +1,4 @@
-caca Score : 10
-cacaca Score : 20
-ca Score : 30
-caac Score : -2
+caca score: 10
+cacaca score: 20
+ca score: 30
+caac score: -2

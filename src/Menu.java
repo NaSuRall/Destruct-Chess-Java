@@ -61,10 +61,11 @@ public class Menu {
                         return;
 
                     case 4 :
-                        String[] scoresArray = Player.loadFileAsArray("Scores-Games.txt");
+                        int[] scoresArray = Player.loadScoresFromFile("Scores-Games.txt");
+
                         // Afficher le tableau avant le tri
                         System.out.println("Contenu du fichier avant le tri :");
-                        for (String score : scoresArray) {
+                        for (int score : scoresArray) {
                             System.out.println(score);
                         }
                         break;

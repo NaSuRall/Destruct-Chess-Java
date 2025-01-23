@@ -1,5 +1,6 @@
 import java.io.BufferedReader;
 import java.io.FileReader;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -47,24 +48,37 @@ public class Player{
 
 
 
-    public static String[] loadFileAsArray(String filePath) {
+    public static int[] loadScoresFromFile(String filePath) {
         try {
-            // Lire toutes les lignes du fichier dans une liste
-            List<String> lines = new ArrayList<>();
+            // Créer un objet pour lire le fichier
             BufferedReader reader = new BufferedReader(new FileReader(filePath));
             String line;
+            int[] scores = new int[10]; // Tableau pour stocker les scores (taille initiale de 10)
+            int index = 0; // Compteur pour ajouter les scores au tableau
 
+            // Lire chaque ligne du fichier
             while ((line = reader.readLine()) != null) {
-                lines.add(line); // Ajouter chaque ligne à la liste
+                // Vérifier si la ligne contient "score:"
+                if (line.contains("score:")) {
+                    // Extraire la partie après "score: "
+                    String[] parts = line.split("score: ");
+                    if (parts.length == 2) {
+                        // Convertir le score en entier et l'ajouter au tableau
+                        scores[index] = Integer.parseInt(parts[1].trim());
+                        index++; // Passer à l'élément suivant du tableau
+                    }
+                }
             }
 
-            reader.close();
+            reader.close(); // Fermer le fichier
 
-            // Convertir la liste en tableau et la retourner
-            return lines.toArray(new String[0]);
-        } catch (Exception e) {
-            System.out.println("Une erreur s'est produite lors de la lecture du fichier : " + e.getMessage());
-            return new String[0]; // Retourne un tableau vide en cas d'erreur
+            // Retourner le tableau avec les scores
+            return scores;
+
+        } catch (IOException e) {
+            // Si une erreur survient, afficher un message
+            System.out.println("Erreur lors de la lecture du fichier : " + e.getMessage());
+            return new int[0]; // Retourner un tableau vide en cas d'erreur
         }
     }
 
