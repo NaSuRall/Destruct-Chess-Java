@@ -1,113 +1,125 @@
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Scanner;
-public class Player{
+
+/**
+ * The Player class represents a player with a pseudo and a score.
+ * It provides methods to manage player information, load scores from a file,
+ * and interact with game mechanics.
+ */
+public class Player {
 
     private String pseudo;
     private int score;
 
-    // Constructeur pour initialiser un joueur
+    /**
+     * Constructor to initialize a Player with a pseudo.
+     *
+     * @param pseudo The pseudo of the player.
+     */
     public Player(String pseudo) {
         this.pseudo = pseudo;
         this.score = 0;
     }
 
+    /**
+     * Gets the pseudo of the player.
+     *
+     * @return The player's pseudo.
+     */
     public String getPseudo() {
         return pseudo;
     }
 
+    /**
+     * Gets the current score of the player.
+     *
+     * @return The player's score.
+     */
     public int getScore() {
         return score;
     }
 
-    // Function pour recuperer les scores du fichier Score Game.txt
-
-
-
+    /**
+     * Displays all the scores stored in a given file.
+     *
+     * @param filePath The path to the file containing the scores.
+     */
     public static void displayAllScores(String filePath) {
-        try {
-            // Ouvrir le fichier pour lecture
-            BufferedReader reader = new BufferedReader(new FileReader(filePath));
+        try (BufferedReader reader = new BufferedReader(new FileReader(filePath))) {
+            System.out.println("Content of Scores-Games.txt:");
             String line;
-
-            System.out.println("Contenu du fichier Scores-Games.txt :");
-            // Lire chaque ligne du fichier
             while ((line = reader.readLine()) != null) {
-                System.out.println(line); // Afficher chaque ligne dans le terminal
+                System.out.println(line);
             }
-
-            // Fermer le lecteur
-            reader.close();
         } catch (Exception e) {
-            System.out.println("Une erreur s'est produite lors de la lecture du fichier : " + e.getMessage());
+            System.out.println("An error occurred while reading the file: " + e.getMessage());
         }
     }
 
-
-
+    /**
+     * Loads scores from a file and stores them in an integer array.
+     * The array can hold up to 100 scores.
+     *
+     * @param filePath The path to the file containing the scores.
+     * @return An array of integers containing the scores.
+     */
     public static int[] loadScoresFromFile(String filePath) {
-        try {
-            // Créer un objet pour lire le fichier
-            BufferedReader reader = new BufferedReader(new FileReader(filePath));
+        try (BufferedReader reader = new BufferedReader(new FileReader(filePath))) {
+            int[] scores = new int[100];
             String line;
-            int[] scores = new int[100]; // Tableau pour stocker les scores (taille initiale de 10)
-            int index = 0; // Compteur pour ajouter les scores au tableau
+            int index = 0;
 
-            // Lire chaque ligne du fichier
             while ((line = reader.readLine()) != null) {
-                // Vérifier si la ligne contient "score:"
                 if (line.contains("score:")) {
-                    // Extraire la partie après "score: "
                     String[] parts = line.split("score: ");
                     if (parts.length == 2) {
-                        // Convertir le score en entier et l'ajouter au tableau
                         scores[index] = Integer.parseInt(parts[1].trim());
-                        index++; // Passer à l'élément suivant du tableau
+                        index++;
                     }
                 }
             }
 
-            reader.close(); // Fermer le fichier
-
-            // Retourner le tableau avec les scores
             return scores;
-
         } catch (IOException e) {
-            // Si une erreur survient, afficher un message
-            System.out.println("Erreur lors de la lecture du fichier : " + e.getMessage());
-            return new int[0]; // Retourner un tableau vide en cas d'erreur
+            System.out.println("Error while reading the file: " + e.getMessage());
+            return new int[0];
         }
     }
 
-
-
-
-
+    /**
+     * Updates the player's score by adding the specified points.
+     *
+     * @param points The number of points to add to the player's score.
+     */
     public void updateScore(int points) {
         this.score += points;
     }
 
-
+    /**
+     * Places the player's symbol on the specified position in the game board.
+     *
+     * @param board        The game board represented as a 2D char array.
+     * @param playerSymbol The player's symbol to place on the board.
+     * @param row          The row index where the symbol will be placed.
+     * @param col          The column index where the symbol will be placed.
+     */
     public static void placePlayer(char[][] board, char playerSymbol, int row, int col) {
-
-        // Place the player at the specified row and column
-        board[row][col] = playerSymbol; // Place the player in the cell
+        board[row][col] = playerSymbol;
     }
 
-
-
-    // Fuction pour demander Combien de personne vont jouer
-    // stocker dans la variable numberOfPlayer
-
+    /**
+     * Prompts the user to enter the number of players and validates the input.
+     * The number must be between 2 and 4.
+     *
+     * @return The number of players.
+     */
     public static int requestPartyNumber() {
         Scanner scanner = new Scanner(System.in);
         byte numberOfPlayers;
 
         System.out.println("Please enter the number of players you would like to play (2 - 4):");
-    // Boucle pour dire qu'il faut entrer un ciffre entre 2 et 4 inclus
 
         while (true) {
             try {
@@ -123,16 +135,17 @@ public class Player{
         }
     }
 
-
-    // Fonction pour crée un Joueur en Objet
+    /**
+     * Creates player objects based on the number of players.
+     * Prompts the user for a valid pseudo for each player.
+     *
+     * @param numberOfPlayers The number of players.
+     * @return An array of Player objects.
+     */
     public static Player[] createPlayers(int numberOfPlayers) {
         Scanner scanner = new Scanner(System.in);
-
-        // Initialisation du tableau qui va contenir les joureurs (OBJ) en fonction du nombre de joueurs
         Player[] players = new Player[numberOfPlayers];
 
-
-        // boucle qui va demander les Pseudo des Joueurs en fonction du nombre avec les securités
         for (int i = 0; i < numberOfPlayers; i++) {
             String pseudo;
             boolean validPseudo;
@@ -149,14 +162,10 @@ public class Player{
 
             } while (!validPseudo);
 
-            // push du pseudo renseigner dans le tableau players  ( Player[] )
             players[i] = new Player(pseudo);
             System.out.println("Player " + (i + 1) + " is now " + pseudo + ".");
         }
 
-
         return players;
     }
-
-
 }

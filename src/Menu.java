@@ -29,7 +29,9 @@ public class Menu {
             System.out.println("To choose an option, type a number");
             System.out.println("1. Choose a game mode");
             System.out.println("2. Read the rules");
-            System.out.println("3. Exit game");
+            System.out.println("3. Scores");
+            System.out.println("4. Exit game");
+
 
             //we try to convert the user input into a byte
             try {
@@ -51,13 +53,13 @@ public class Menu {
                         System.out.println("The winner gains 5 points, and the loser loses 2 points.");
                         break;
 
-                    case 3:
+                    case 4:
                         // Exit the game
                         System.out.println("See you next time!");
                         scanner.close();
                         return;
 
-                    case 4 :
+                    case 3:
                         System.out.println("1. show scores");
                         System.out.println("2. show ascending scores");
                         System.out.println("3. show descending scores");
