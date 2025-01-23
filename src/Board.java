@@ -4,7 +4,10 @@ public class Board {
     public static final String RESET = "\u001B[0m";   // Reset to default color
     public static final String GREEN = "\u001B[32m";  // Green color for Player 1
     public static final String BLUE = "\u001B[34m";   // Blue color for Player 2
+    public static final String YELLOW = "\u001B[33m";  // Yellow color for Player3
+    public static final String PURPLE = "\u001B[35m";  // Purple color for Player4
     public static final String RED = "\u001B[31m";    // Red color for destroyed cells ('D')
+
 
     // Create the rows and columns for the board
     public static char[][] CreateBoard(int rows, int cols) {
@@ -35,10 +38,13 @@ public class Board {
                     System.out.print(GREEN + "[" + board[i][j] + "]" + RESET); // Player 1 in green
                 } else if (board[i][j] == '2') {
                     System.out.print(BLUE + "[" + board[i][j] + "]" + RESET);  // Player 2 in blue
-                } else if (board[i][j] == 'D') {
-                    System.out.print(RED + "[" + board[i][j] + "]" + RESET);   // Destroyed cell in red
                 } else if (board[i][j] == '3') {
-                    System.out.print(BLUE + "[" + board[i][j] + "]" + RESET);
+                    System.out.print(YELLOW + "[" + board[i][j] + "]" + RESET);
+                } else if (board[i][j] == '4') {
+                    System.out.print(PURPLE + "[" + board[i][j] + "]" + RESET);
+                }
+                else if (board[i][j] == 'D') {
+                    System.out.print(RED + "[" + board[i][j] + "]" + RESET);   // Destroyed cell in red
                 }
                 else {
                     System.out.print("[" + board[i][j] + "]"); // Normal cell
