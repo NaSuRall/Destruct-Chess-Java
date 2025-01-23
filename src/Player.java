@@ -1,8 +1,8 @@
 import java.util.Scanner;
 public class Player{
 
-    public String pseudo;
-    public int score;
+    private String pseudo;
+    private int score;
 
     // Constructeur pour initialiser un joueur
     public Player(String pseudo) {
@@ -16,6 +16,10 @@ public class Player{
 
     public int getScore() {
         return score;
+    }
+
+    public void updateScore(int points) {
+        this.score += points;
     }
 
 

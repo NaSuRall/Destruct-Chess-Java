@@ -56,16 +56,20 @@ public class Game {
             if (Cell.checkIfPlayerLost(board, currentRow, currentCol)) {
                 System.out.println(COLORS[currentPlayerIndex % COLORS.length] + currentPlayer.getPseudo() + RESET + " is blocked and has lost!");
                 System.out.println("Remaining players:");
+                currentPlayer.updateScore(-2);
+                System.out.println(currentPlayer.getPseudo() + "new score: " + currentPlayer.getScore());
 
                 // Announce remaining players
                 for (int i = 0; i < players.length; i++) {
                     if (i != currentPlayerIndex && !Cell.checkIfPlayerLost(board, playerPositions[i][0], playerPositions[i][1])) {
-                        System.out.println(COLORS[i % COLORS.length] + players[i].getPseudo() + RESET);
+                        players[i].updateScore(5);
+                        System.out.println(players[i].getPseudo() + " new score: " + players[i].getScore());
+
                     }
                 }
-                currentPlayer.score=-2;
+
+
                 //System.out.println(players[0].getPseudo() + players[0]);
-                System.out.println(currentPlayer.getScore());
                 break; // End the game
             }
 
