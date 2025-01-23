@@ -65,6 +65,7 @@ public class Menu {
                         System.out.println("1. Show scores");
                         System.out.println("2. Show ascending scores");
                         System.out.println("3. Show descending scores");
+                        System.out.println("4. Main Menu");
                         int choix2;
                         try {
                             // Attempt to convert the user input for scores menu
@@ -101,6 +102,8 @@ public class Menu {
                                         System.out.println(scoresArray3[i]);
                                     }
                                     break;
+                                case 4:
+                                    Menu.menu();
                                 default:
                                     // Inform the user of an invalid choice
                                     System.out.println("Invalid choice: choose a number between 1 and 3");
@@ -133,6 +136,7 @@ public class Menu {
             System.out.println("Game mode");
             System.out.println("1. Normal game");
             System.out.println("2. Accelerated game");
+            System.out.println("3. Main Menu");
 
             try {
                 // Get the sub-menu choice
@@ -155,7 +159,8 @@ public class Menu {
                         Player[] players2 = Player.createPlayers(numberOfPlayers2);
                         AcceleratedGame.main(players2);
                         return; // Return to the main menu
-
+                    case 3:
+                        Menu.menu();
                     default:
                         // Inform the user of an invalid choice
                         System.out.println("Invalid choice: please choose a number between 1 and 2.");
