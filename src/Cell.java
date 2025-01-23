@@ -1,8 +1,22 @@
 import java.util.Scanner;
 
+/**
+ * Class representing the game logic for moving players and checking if players are blocked.
+ * This class includes methods for moving a player on the board, checking if a player has lost, and
+ * managing the destruction of cells.
+ */
 public class Cell {
 
-    // Method to move a player on the board
+    /**
+     * Moves the player on the board based on input (Z, Q, S, D for up, left, down, right).
+     * After the move, it allows the player to destroy a cell on the board and validates the move and destruction.
+     *
+     * @param board The game board represented as a 2D array of characters.
+     * @param player The character representing the player on the board.
+     * @param currentRow The current row position of the player.
+     * @param currentCol The current column position of the player.
+     * @return An array containing the new row and column of the player after the move. Returns null if the move is invalid.
+     */
     public static int[] MovePlayer(char[][] board, char player, int currentRow, int currentCol) {
         Scanner scanner = new Scanner(System.in);
 
@@ -117,7 +131,15 @@ public class Cell {
         }
     }
 
-    // Method to check if the player has lost (if all adjacent cells are blocked)
+    /**
+     * Checks if the player has lost by evaluating if all adjacent cells are blocked.
+     * A player is considered lost if there are no valid moves available in any direction.
+     *
+     * @param board The game board represented as a 2D array of characters.
+     * @param currentRow The current row position of the player.
+     * @param currentCol The current column position of the player.
+     * @return True if the player has lost (all adjacent cells are blocked), false otherwise.
+     */
     public static boolean checkIfPlayerLost(char[][] board, int currentRow, int currentCol) {
         // Check all adjacent cells (up, down, left, right) to see if the player is blocked
         return isMoveBlocked(board, currentRow - 1, currentCol) &&  // Up
@@ -126,7 +148,15 @@ public class Cell {
                 isMoveBlocked(board, currentRow, currentCol + 1);    // Right
     }
 
-    // Method to check if a move to a specific cell is blocked
+    /**
+     * Checks if a move to a specific cell is blocked.
+     * A move is blocked if the target cell is out of bounds or contains something other than an empty space ('.').
+     *
+     * @param board The game board represented as a 2D array of characters.
+     * @param row The row position of the cell to check.
+     * @param col The column position of the cell to check.
+     * @return True if the move is blocked, false otherwise.
+     */
     private static boolean isMoveBlocked(char[][] board, int row, int col) {
         // Check if the cell is out of bounds
         if (row < 0 || row >= board.length || col < 0 || col >= board[0].length) {

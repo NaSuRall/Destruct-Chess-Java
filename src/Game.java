@@ -3,6 +3,10 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Random;
 
+/**
+ * The main class for running the game, including initializing the game board, managing players' turns,
+ * handling player movement, checking for lost players, and saving game results to a file.
+ */
 public class Game {
 
     // ANSI color codes for displaying colors in the console
@@ -12,12 +16,17 @@ public class Game {
     public static final String YELLOW = "\u001B[33m";  // Yellow color for Player 3
     public static final String PURPLE = "\u001B[35m";  // Purple color for Player 4
 
+    /**
+     * The entry point for the game, where players are initialized, and the main game loop runs.
+     * It manages the turns, checks for blocked (lost) players, updates the scores, and writes the results to a file.
+     *
+     * @param players The array of players participating in the game.
+     */
     public static void main(Player... players) {
         // Create a game board with 10 rows and 11 columns
         char[][] board = Board.CreateBoard(10, 11);
 
         // Manually place players on fixed positions on the board
-        // These positions are now stored for each player, instead of using fixed currentRow/col.
         int[][] playerPositions = new int[players.length][2];
         if (players.length > 0) {
             Player.placePlayer(board, '1', 4, 4); // Player 1 at E4

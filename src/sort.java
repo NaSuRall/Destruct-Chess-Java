@@ -1,30 +1,21 @@
-/*
-    mergeSort:
-        if the array has 1 or 0 elements:
-            we stop the function
-        find the middle of the original array
-        left array = elements of the original array up to the middle
-        right array = remaining elements
-        copy elements from the original array up to the middle into the left array
-        copy elements from the middle to the end into the right array
-        sort the left array by recursively calling mergeSort
-        sort the right array by recursively calling mergeSort
-        call the merge function to merge the left and right arrays
-
-    merge:
-        initialize variables to traverse the arrays
-        as long as i and j do not exceed the size of their respective arrays:
-            if left[i] is smaller than right[j]:
-                insert left[i] into arr and increment k and i
-            otherwise:
-                insert right[j] into arr and increment k and j
-        while i is less than the size of the left array:
-            add the remaining elements of the left array to arr
-        while j is less than the size of the right array:
-            add the remaining elements of the right array to arr
+/**
+ * The {@code sort} class provides static methods for sorting arrays using different algorithms.
+ * It includes methods for the merge sort algorithm, as well as an insertion sort method for sorting in descending order.
+ * <p>
+ * The {@code mergeSort} method is used to sort an array using the merge sort algorithm, which recursively divides
+ * the array into two halves, sorts each half, and merges them back together.
+ * The {@code descending} method implements the insertion sort algorithm to sort an array in descending order.
  */
-
 public class sort {
+
+    /**
+     * Sorts an array using the merge sort algorithm.
+     * <p>
+     * Merge sort works by recursively dividing the array into two halves until each half has one or zero elements.
+     * Then, it merges the sorted halves back together.
+     *
+     * @param myArray The array to be sorted.
+     */
     public static void mergeSort(int[] myArray) {
         // if the array has less than 2 elements, stop the function
         if (myArray.length <= 1) {
@@ -51,12 +42,21 @@ public class sort {
         merge(myArray, left, right);
     }
 
+    /**
+     * Merges two sorted arrays into a single sorted array.
+     * This function is used by the merge sort algorithm to combine the left and right arrays after they have been sorted.
+     *
+     * @param arr   The original array where the merged elements will be stored.
+     * @param left  The left sorted array.
+     * @param right The right sorted array.
+     */
     public static void merge(int[] arr, int[] left, int[] right) {
         // initialize variables to traverse the arrays
         int i = 0;
         int j = 0;
         int k = 0;
 
+        // merge elements from the left and right arrays into arr
         while (i < left.length && j < right.length) {
             if (left[i] <= right[j]) {
                 // insert left[i] into arr and increment i and k
@@ -78,14 +78,14 @@ public class sort {
         }
     }
 
-    /*
-        Initialize the length of the array
-        Traverse the array:
-            initialize the variable key with the value at index i
-            initialize j with the value i - 1
-            while j is greater than or equal to 0 and myArray[j] is less than key:
-                shift elements backwards
-            insert the value of key at index j + 1
+    /**
+     * Sorts an array in descending order using the insertion sort algorithm.
+     * <p>
+     * Insertion sort works by iterating through the array and inserting each element into its correct
+     * position relative to the already sorted portion of the array.
+     * The array is sorted in descending order by comparing each element to the previous elements.
+     *
+     * @param myArray The array to be sorted.
      */
     public static void descending(int[] myArray) {
         // initialize a variable for the length of the array
@@ -95,11 +95,13 @@ public class sort {
             int key = myArray[i];
 
             int j = i - 1;
+            // shift elements backwards to make room for the key
             while (j >= 0 && myArray[j] < key) {
                 myArray[j + 1] = myArray[j];
                 j--;
             }
 
+            // insert the key into its correct position
             myArray[j + 1] = key;
         }
     }

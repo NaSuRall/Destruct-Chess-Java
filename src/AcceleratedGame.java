@@ -1,18 +1,55 @@
 import java.util.Random;
 
+/**
+ * Class representing an accelerated game with multiple players.
+ * This class contains the main game logic, including game initialization,
+ * player placement, turn management, and the destruction of rows or columns.
+ */
 public class AcceleratedGame {
 
+    /**
+     * Color code to reset the text color.
+     */
     public static final String RESET = "\u001B[0m";
+
+    /**
+     * Color code for green text.
+     */
     public static final String GREEN = "\u001B[32m";
+
+    /**
+     * Color code for blue text.
+     */
     public static final String BLUE = "\u001B[34m";
+
+    /**
+     * Color code for yellow text.
+     */
     public static final String YELLOW = "\u001B[33m";
+
+    /**
+     * Color code for purple text.
+     */
     public static final String PURPLE = "\u001B[35m";
+
+    /**
+     * Color code for red text.
+     */
     public static final String RED = "\u001B[31m";
 
+    /**
+     * Main method of the game, managing player turns, game progression, and the destruction of cells.
+     *
+     * @param players List of players participating in the game.
+     */
     public static void main(Player... players) {
-        char[][] board = Board.CreateBoard(10, 11); // Create the game board with 10 rows and 11 columns
-        int[][] playerPositions = new int[players.length][2]; // Array to hold player positions
+        // Create the game board with 10 rows and 11 columns
+        char[][] board = Board.CreateBoard(10, 11);
 
+        // Array to hold the positions of the players
+        int[][] playerPositions = new int[players.length][2];
+
+        // Place players on the board at the start of the game
         if (players.length > 0) {
             Player.placePlayer(board, '1', 4, 4); // Place player 1 at (4, 4)
             playerPositions[0] = new int[]{4, 4};
@@ -30,20 +67,31 @@ public class AcceleratedGame {
             playerPositions[3] = new int[]{5, 5};
         }
 
-        Board.showBoard(board); // Show the initial game board
-        Random random = new Random();
-        int currentPlayerIndex = random.nextInt(players.length); // Randomly select the first player
-        boolean[] isEliminated = new boolean[players.length]; // Track eliminated players
-        int turnCount = 0; // Track the number of turns
+        // Show the initial game board
+        Board.showBoard(board);
 
+        Random random = new Random();
+
+        // Randomly select the first player
+        int currentPlayerIndex = random.nextInt(players.length);
+
+        // Track eliminated players
+        boolean[] isEliminated = new boolean[players.length];
+
+        // Track the number of turns
+        int turnCount = 0;
+
+        // Main game loop
         while (true) {
             int remainingPlayers = 0;
+
+            // Count the remaining players who are not eliminated
             for (boolean eliminated : isEliminated) {
-                if (!eliminated) remainingPlayers++; // Count the remaining players
+                if (!eliminated) remainingPlayers++;
             }
 
+            // If only one player remains, declare the winner
             if (remainingPlayers == 1) {
-                // If only one player remains, declare the winner
                 for (int i = 0; i < players.length; i++) {
                     if (!isEliminated[i]) {
                         System.out.println(players[i].getPseudo() + RESET + " is the winner!");
@@ -52,8 +100,8 @@ public class AcceleratedGame {
                 }
             }
 
+            // Skip the turn if the current player is eliminated
             if (isEliminated[currentPlayerIndex]) {
-                // Skip the turn if the current player is eliminated
                 currentPlayerIndex = (currentPlayerIndex + 1) % players.length;
                 continue;
             }
@@ -99,6 +147,7 @@ public class AcceleratedGame {
                 }
             }
 
+            // Get the current player
             Player currentPlayer = players[currentPlayerIndex];
             String currentColor = switch (currentPlayerIndex) {
                 case 0 -> GREEN;
@@ -108,13 +157,13 @@ public class AcceleratedGame {
                 default -> RESET;
             };
 
-            // Print current player's turn message
+            // Print the current player's turn message
             System.out.println(currentColor + currentPlayer.getPseudo() + RESET + "'s turn");
             int currentRow = playerPositions[currentPlayerIndex][0];
             int currentCol = playerPositions[currentPlayerIndex][1];
 
+            // Check if the current player has lost
             if (Cell.checkIfPlayerLost(board, currentRow, currentCol)) {
-                // Check if the current player is blocked and lost
                 System.out.println(currentColor + currentPlayer.getPseudo() + RESET + " is blocked and has lost!");
                 isEliminated[currentPlayerIndex] = true; // Eliminate the player
                 continue;
