@@ -16,11 +16,12 @@ public class Game {
         // Crée un plateau de jeu avec 10 lignes et 11 colonnes
         char[][] board = Board.CreateBoard(10, 11);
 
-        // Placer manuellement les joueurs à des coordonnées précises sur le plateau
-        Player.placePlayer(board, '1', 3, 4); // Joueur 1
-        Player.placePlayer(board, '2', 4, 4); // Joueur 2
-        Player.placePlayer(board, '3', 3, 5); // Joueur 3
-        Player.placePlayer(board, '4', 4, 5); // Joueur 4
+        // Placer les joueurs aux coordonnées fixes sur le plateau
+        if (players.length > 0) Player.placePlayer(board, '1', 4, 4); // Joueur 1 en E4
+        if (players.length > 1) Player.placePlayer(board, '2', 5, 4); // Joueur 2 en E5
+        if (players.length > 2) Player.placePlayer(board, '3', 4, (5)); // Joueur 3 en F4
+        if (players.length > 3) Player.placePlayer(board, '4', 5, 5); // Joueur 4 en F5
+
 
         // Afficher le plateau après avoir placé les joueurs
         Board.showBoard(board);
