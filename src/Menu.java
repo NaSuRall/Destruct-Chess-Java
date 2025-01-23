@@ -61,17 +61,52 @@ public class Menu {
                         return;
 
                     case 4 :
-                        int[] scoresArray = Player.loadScoresFromFile("Scores-Games.txt");
+                        System.out.println("1. show scores");
+                        System.out.println("2. show ascending scores");
+                        System.out.println("3. show descending scores");
+                        int choix2;
+                        try{
+                            choix2 = Byte.parseByte(scanner.nextLine());
+                            switch (choix2){
+                                case 1:
+                                    int[] scoresArray = Player.loadScoresFromFile("Scores-Games.txt");
 
-                        // Afficher le tableau avant le tri
-                        System.out.println("Contenu du fichier avant le tri :");
-                        for (int score : scoresArray) {
-                            System.out.println(score);
+                                    // Afficher le tableau avant le tri
+                                    System.out.println("Contenu du fichier avant le tri :");
+                                    for (int score : scoresArray) {
+                                        System.out.println(score);
+                                    }
+                                    break;
+
+                                case 2:
+                                    int[] scoresArray2 = Player.loadScoresFromFile("Scores-Games.txt");
+                                    sort.mergeSort(scoresArray2);
+                                    // Afficher le tableau avant le tri
+                                    System.out.println("Contenu du fichier avant le tri :");
+                                    for (int score : scoresArray2) {
+                                        System.out.println(score);
+                                    }
+                                    break;
+                                case 3:
+                                    int[] scoresArray3 = Player.loadScoresFromFile("Scores-Games.txt");
+                                    sort.descending(scoresArray3);
+                                    // Afficher le tableau avant le tri
+                                    System.out.println("Contenu du fichier avant le tri :");
+                                    for (int score : scoresArray3) {
+                                        System.out.println(score);
+                                    }
+                                    break;
+                                default:
+                                    System.out.println("Invalid choice: choose a number between 1 and 3");
+                                    break;
+                            }
                         }
-                        break;
+                        catch (NumberFormatException e){
+                            System.out.println("Error: Please enter a valid number.");
+                        }
                     // default establishes a case to inform the user that their input is incorrect
                     default:
-                        System.out.println("Invalid choice: choose a number between 1 and 3");
+                        System.out.println("Invalid choice: choose a number between 1 and 4");
                         break;
                 }
 
