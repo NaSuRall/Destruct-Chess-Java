@@ -76,9 +76,7 @@ public class Menu {
                                     int[] scoresArray = Player.loadScoresFromFile("Scores-Games.txt");
                                     System.out.println("The top 10 scores from the file:");
                                     // Display the top 10 scores
-                                    for (int i = 0; i < 10 && i < scoresArray.length; i++) {
-                                        System.out.println(scoresArray[i]);
-                                    }
+                                    sort.showTab(scoresArray);
                                     break;
 
                                 case 2:
@@ -88,9 +86,7 @@ public class Menu {
                                     sort.mergeSort(scoresArray2);
                                     System.out.println("The top 10 scores from the file:");
                                     // Display the top 10 scores
-                                    for (int i = 0; i < 10 && i < scoresArray2.length; i++) {
-                                        System.out.println(scoresArray2[i]);
-                                    }
+                                    sort.showTab(scoresArray2);
                                     break;
                                 case 3:
                                     int[] scoresArray3 = Player.loadScoresFromFile("Scores-Games.txt");
@@ -98,9 +94,7 @@ public class Menu {
                                     sort.descending(scoresArray3);
                                     System.out.println("The top 10 scores from the file:");
                                     // Display the top 10 scores
-                                    for (int i = 0; i < 10 && i < scoresArray3.length; i++) {
-                                        System.out.println(scoresArray3[i]);
-                                    }
+                                    sort.showTab(scoresArray3);
                                     break;
                                 case 4:
                                     Menu.menu();

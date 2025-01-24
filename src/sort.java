@@ -103,4 +103,11 @@ public class sort {
             myArray[j + 1] = key;
         }
     }
+
+    // show scores
+    public static void showTab(int [] scoresArray){
+        for (int i = 0; i < 10 && i < scoresArray.length; i++) {
+            System.out.println(scoresArray[i]);
+        }
+    }
 }
