@@ -25,6 +25,12 @@
  */
 
 public class sort {
+
+    /**
+     * sort the table in ascending order.
+     *
+     * @param myArray the score array.
+     */
     public static void mergeSort(int[] myArray) {
         // if the array has less than 2 elements, stop the function
         if (myArray.length <= 1) {
@@ -51,6 +57,11 @@ public class sort {
         merge(myArray, left, right);
     }
 
+    /**
+     * merge left array and right array to arr.
+     *
+     * @param arr, left, right the score array.
+     */
     public static void merge(int[] arr, int[] left, int[] right) {
         // initialize variables to traverse the arrays
         int i = 0;
@@ -87,10 +98,15 @@ public class sort {
                 shift elements backwards
             insert the value of key at index j + 1
      */
+
+    /**
+     * sort the array in descending order .
+     *
+     * @param myArray the score array.
+     */
     public static void descending(int[] myArray) {
         // initialize a variable for the length of the array
         int n = myArray.length;
-
         for (int i = 1; i < n; i++) {
             int key = myArray[i];
 
@@ -105,6 +121,11 @@ public class sort {
     }
 
     // show scores
+    /**
+     * show the array .
+     *
+     * @param scoresArray the score array.
+     */
     public static void showTab(int [] scoresArray){
         for (int i = 0; i < 10 && i < scoresArray.length; i++) {
             System.out.println(scoresArray[i]);

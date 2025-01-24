@@ -67,7 +67,7 @@ public class Player {
      */
     public static int[] loadScoresFromFile(String filePath) {
         try (BufferedReader reader = new BufferedReader(new FileReader(filePath))) {
-            int[] scores = new int[100];
+            int[] scores = new int[10];
             String line;
             int index = 0;
 
